@@ -30,7 +30,7 @@ and `/plugin install aiready@plastorium`. Update with
 ### Claude (claude.ai, Claude Desktop, Cowork)
 
 Download `aiready-<version>-claude.zip` from the
-[latest release](../../releases/latest), then
+[latest release](https://github.com/plastorium/aiready-plugins/releases/latest), then
 **Customize → Plugins → Add → Upload** and choose the ZIP (do not unzip it).
 Uploading a newer ZIP over the installed one is the update.
 If your organization manages plugins, an admin installs it.
@@ -39,7 +39,7 @@ If your organization manages plugins, an admin installs it.
 
 The `plugins/aiready/` folder is an [agent-plugins](https://agent-plugins.org/)
 package with a Codex manifest (`.codex-plugin/plugin.json`). Download
-`aiready-<version>-chatgpt.zip` from the [latest release](../../releases/latest)
+`aiready-<version>-chatgpt.zip` from the [latest release](https://github.com/plastorium/aiready-plugins/releases/latest)
 and upload it as a plugin (use `-chatgpt-update.zip` to update an existing
 install), or point a host that installs plugins from a folder or Git
 repository at `plugins/aiready/`.
@@ -65,7 +65,7 @@ servers with OAuth can connect without the plugin; see
 
 ## Support
 
-- Problems with the plugin: [open an issue](../../issues/new/choose).
+- Problems with the plugin: [open an issue](https://github.com/plastorium/aiready-plugins/issues/new/choose).
 - Your account, data or billing: <https://aiready.plastorium.com/support>.
 - Security: see [SECURITY.md](SECURITY.md).
 

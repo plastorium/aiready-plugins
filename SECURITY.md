@@ -3,7 +3,7 @@
 Please do not report security problems in public issues.
 
 Report them privately through this repository's
-[security advisories](../../security/advisories/new), or through
+[security advisories](https://github.com/plastorium/aiready-plugins/security/advisories/new), or through
 <https://aiready.plastorium.com/support> marked "Security". Include what you
 found, how to reproduce it, and what it affects. We confirm receipt and keep
 you informed until it is fixed.
