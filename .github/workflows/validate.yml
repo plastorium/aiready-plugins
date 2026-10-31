@@ -4,6 +4,7 @@ name: Validate plugin
 
 on:
   push:
+    branches: [main]
   pull_request:
   schedule:
     - cron: "17 6 * * 1"
@@ -27,14 +28,34 @@ jobs:
 
       - name: Manifests parse and agree on the version
         run: |
-          set -euo pipefail
-          v=$(tr -d '\n' < VERSION)
-          for f in .claude-plugin/marketplace.json plugins/aiready/.claude-plugin/plugin.json plugins/aiready/.codex-plugin/plugin.json plugins/aiready/plugin.json plugins/aiready/.mcp.json; do
-            node -e 'JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"))' "$f"
-          done
-          for f in .claude-plugin/marketplace.json plugins/aiready/.claude-plugin/plugin.json plugins/aiready/.codex-plugin/plugin.json plugins/aiready/plugin.json; do
-            grep -q "\"version\": \"$v\"" "$f" || { echo "::error file=$f::version is not $v"; exit 1; }
-          done
+          node - <<'JS'
+          const fs = require("fs");
+          const v = fs.readFileSync("VERSION", "utf8").trim();
+          const read = (f) => JSON.parse(fs.readFileSync(f, "utf8"));
+          const errors = [];
+          const expect = (where, got) => {
+            if (got !== v) errors.push(`${where}: ${JSON.stringify(got)} is not ${v}`);
+          };
+          for (const f of [
+            "plugins/aiready/.claude-plugin/plugin.json",
+            "plugins/aiready/.codex-plugin/plugin.json",
+            "plugins/aiready/plugin.json",
+          ])
+            expect(`${f} version`, read(f).version);
+          const market = read(".claude-plugin/marketplace.json");
+          for (const p of market.plugins) {
+            expect(`marketplace ${p.name} version`, p.version);
+            for (const [k, s] of Object.entries(p.mcpServers ?? {}))
+              expect(`marketplace ${k} header`, s.headers?.["x-aiready-plugin-version"]);
+          }
+          for (const f of ["plugins/aiready/.mcp.json", "plugins/aiready/mcp.json"])
+            for (const [k, s] of Object.entries(read(f).mcpServers))
+              expect(`${f} ${k} header`, s.headers?.["x-aiready-plugin-version"]);
+          if (errors.length) {
+            for (const e of errors) console.log(`::error::${e}`);
+            process.exit(1);
+          }
+          JS
 
       - name: Every skill has a name and description
         run: |
@@ -47,7 +68,7 @@ jobs:
       - name: Claude Code accepts the plugin and the marketplace
         run: |
           set -euo pipefail
-          npm install --global @anthropic-ai/claude-code
+          npm install --global @anthropic-ai/claude-code@2.1.316
           claude plugin validate plugins/aiready
           claude plugin validate .
 

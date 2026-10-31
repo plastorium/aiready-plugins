@@ -23,6 +23,10 @@ claude plugin marketplace add plastorium/aiready-plugins
 claude plugin install aiready@plastorium
 ```
 
+Claude Code also connects **AIReady Advanced**, a second server with
+extra tools and its own consent; the Claude ZIP below does too. ChatGPT and
+Codex connect the standard server only.
+
 Inside a session the same works as `/plugin marketplace add plastorium/aiready-plugins`
 and `/plugin install aiready@plastorium`. Update with
 `/plugin marketplace update plastorium`, then `/reload-plugins`.
@@ -56,7 +60,7 @@ servers with OAuth can connect without the plugin; see
 | Path                              | What it is                                                                                                         |
 | --------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | `plugins/aiready/skills/`         | the skills, one folder each (`SKILL.md` + references)                                                              |
-| `plugins/aiready/.mcp.json`       | the AIReady MCP server                                                                                             |
+| `plugins/aiready/.mcp.json`       | the AIReady MCP server (`mcp.json` holds the same for agent-plugins hosts)                                         |
 | `plugins/aiready/.claude-plugin/` | Claude plugin manifest                                                                                             |
 | `plugins/aiready/.codex-plugin/`  | Codex / ChatGPT plugin manifest                                                                                    |
 | `plugins/aiready/plugin.json`     | agent-plugins manifest                                                                                             |
