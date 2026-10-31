@@ -55,14 +55,15 @@ jobs:
         if: github.event_name != 'pull_request'
         run: |
           set -euo pipefail
-          body='{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ci","version":"0"}}}'
+          # initialize is open by design; tools/list must ask for OAuth.
+          body='{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
           for path in api/mcp api/mcp/advanced; do
             u="https://aiready.plastorium.com/$path"
             headers=$(curl -s -o /dev/null -D - -X POST -H 'content-type: application/json' \
               -H 'accept: application/json, text/event-stream' -d "$body" "$u")
             echo "$headers" | head -1
             echo "$headers" | head -1 | grep -q ' 401' \
-              || { echo "::error::$u did not answer 401 without a token"; exit 1; }
+              || { echo "::error::$u did not challenge an uncredentialed tools/list with 401"; exit 1; }
             echo "$headers" | grep -iq '^www-authenticate: Bearer resource_metadata=' \
               || { echo "::error::$u gave no OAuth resource metadata"; exit 1; }
             curl -sf "https://aiready.plastorium.com/.well-known/oauth-protected-resource/$path" \
