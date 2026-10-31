@@ -1,0 +1,11 @@
+{
+  "name": "aiready",
+  "displayName": "AIReady",
+  "version": "0.22.0",
+  "description": "Understand your business's competitive position, AI visibility, online presence and reputation in AIReady, then choose improvements and measure progress.",
+  "author": {
+    "name": "Plastorium"
+  },
+  "homepage": "https://aiready.plastorium.com/",
+  "license": "MIT"
+}

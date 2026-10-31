@@ -1,0 +1,31 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "plastorium",
+  "owner": {
+    "name": "Plastorium"
+  },
+  "description": "AIReady plugins by Plastorium.",
+  "plugins": [
+    {
+      "name": "aiready",
+      "source": "./plugins/aiready",
+      "version": "0.22.0",
+      "description": "Understand your business's competitive position, AI visibility, online presence and reputation in AIReady, then choose improvements and measure progress.",
+      "author": {
+        "name": "Plastorium"
+      },
+      "homepage": "https://aiready.plastorium.com/",
+      "license": "MIT",
+      "category": "productivity",
+      "mcpServers": {
+        "aiready-advanced": {
+          "type": "streamable-http",
+          "url": "https://aiready.plastorium.com/api/mcp/advanced",
+          "headers": {
+            "x-aiready-plugin-version": "0.22.0"
+          }
+        }
+      }
+    }
+  ]
+}

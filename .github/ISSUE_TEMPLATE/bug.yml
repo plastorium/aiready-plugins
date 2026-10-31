@@ -1,0 +1,30 @@
+name: Plugin problem
+description: The plugin did not install, connect or answer as expected.
+labels: [bug]
+body:
+  - type: dropdown
+    id: host
+    attributes:
+      label: Assistant
+      options:
+        [
+          Claude Code,
+          Claude (claude.ai / Desktop / Cowork),
+          ChatGPT,
+          Codex,
+          Other MCP client,
+        ]
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Plugin version
+      description: From VERSION, or the version your assistant shows.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you asked or did, what you expected, what happened. Leave out private business data.
+    validations:
+      required: true

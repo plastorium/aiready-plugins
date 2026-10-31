@@ -1,0 +1,10 @@
+# Contributing
+
+This repository is published by AIReady's release process; every release
+replaces its contents. Pull requests therefore are not merged here.
+
+- Found a bug or a confusing answer? [Open an issue](https://github.com/plastorium/aiready-plugins/issues/new/choose)
+  with the assistant you used (Claude, ChatGPT, Codex, other), the plugin
+  version (`VERSION`), what you asked and what happened. Leave out private
+  business data.
+- Have a suggestion? Open an issue; accepted changes ship in the next release.

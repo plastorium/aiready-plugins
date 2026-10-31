@@ -1,0 +1,93 @@
+# Checks the published plugin on every push and pull request. The contents
+# are published by AIReady's release process; this only verifies them.
+name: Validate plugin
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: 22
+
+      - name: Manifests parse and agree on the version
+        run: |
+          node - <<'JS'
+          const fs = require("fs");
+          const v = fs.readFileSync("VERSION", "utf8").trim();
+          const read = (f) => JSON.parse(fs.readFileSync(f, "utf8"));
+          const errors = [];
+          const expect = (where, got) => {
+            if (got !== v) errors.push(`${where}: ${JSON.stringify(got)} is not ${v}`);
+          };
+          for (const f of [
+            "plugins/aiready/.claude-plugin/plugin.json",
+            "plugins/aiready/.codex-plugin/plugin.json",
+            "plugins/aiready/plugin.json",
+          ])
+            expect(`${f} version`, read(f).version);
+          const market = read(".claude-plugin/marketplace.json");
+          for (const p of market.plugins) {
+            expect(`marketplace ${p.name} version`, p.version);
+            for (const [k, s] of Object.entries(p.mcpServers ?? {}))
+              expect(`marketplace ${k} header`, s.headers?.["x-aiready-plugin-version"]);
+          }
+          for (const f of ["plugins/aiready/.mcp.json", "plugins/aiready/mcp.json"])
+            for (const [k, s] of Object.entries(read(f).mcpServers))
+              expect(`${f} ${k} header`, s.headers?.["x-aiready-plugin-version"]);
+          if (errors.length) {
+            for (const e of errors) console.log(`::error::${e}`);
+            process.exit(1);
+          }
+          JS
+
+      - name: Every skill has a name and description
+        run: |
+          set -euo pipefail
+          for s in plugins/aiready/skills/*/SKILL.md; do
+            head -20 "$s" | grep -q '^name: ' || { echo "::error file=$s::no name"; exit 1; }
+            head -20 "$s" | grep -q '^description: ' || { echo "::error file=$s::no description"; exit 1; }
+          done
+
+      - name: Claude Code accepts the plugin and the marketplace
+        run: |
+          set -euo pipefail
+          npm install --global @anthropic-ai/claude-code@2.1.316
+          claude plugin validate plugins/aiready
+          claude plugin validate .
+
+      - name: The MCP servers answer and ask for OAuth
+        if: github.event_name != 'pull_request'
+        run: |
+          set -euo pipefail
+          # initialize is open by design; tools/list must ask for OAuth.
+          body='{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+          for path in api/mcp api/mcp/advanced; do
+            u="https://aiready.plastorium.com/$path"
+            headers=$(curl -s -o /dev/null -D - -X POST -H 'content-type: application/json' \
+              -H 'accept: application/json, text/event-stream' -d "$body" "$u")
+            echo "$headers" | head -1
+            echo "$headers" | head -1 | grep -q ' 401' \
+              || { echo "::error::$u did not challenge an uncredentialed tools/list with 401"; exit 1; }
+            echo "$headers" | grep -iq '^www-authenticate: Bearer resource_metadata=' \
+              || { echo "::error::$u gave no OAuth resource metadata"; exit 1; }
+            curl -sf "https://aiready.plastorium.com/.well-known/oauth-protected-resource/$path" \
+              | node -e 'const m=JSON.parse(require("fs").readFileSync(0,"utf8")); if(!m.resource||!m.authorization_servers?.length) process.exit(1)' \
+              || { echo "::error::protected-resource metadata for $path is missing or incomplete"; exit 1; }
+          done
