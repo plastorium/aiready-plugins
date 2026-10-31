@@ -1,0 +1,35 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "name": "Plastorium"
+  },
+  "description": "Understand your business's competitive position, AI visibility, online presence and reputation in AIReady, then choose improvements and measure progress.",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "capabilities": [
+          "Interactive"
+        ],
+        "category": "Business & Operations",
+        "defaultPrompt": [
+          "Do AI chats recommend my business, and for which questions?",
+          "Where do I stand against competitors in my niche?",
+          "What should I improve first, and why?"
+        ],
+        "developerName": "Plastorium",
+        "displayName": "AIReady",
+        "longDescription": "AIReady helps business owners and marketers review business performance and organize improvements using their existing AIReady account. Review completed scans and delivered reports, compare competitors on measured AI visibility, topics, reviews and other collected features, and turn prioritized recommendations into a task plan. Track task status and changes across dated measurements. You can also request a new scan when authorized and quota permits. Answers distinguish observed results, estimates and user-confirmed information. Available actions depend on the access granted to your connection; AIReady does not guarantee AI recommendations or sales.",
+        "shortDescription": "Compare business performance",
+        "logo": "./assets/logo.png",
+        "composerIcon": "./assets/composer-icon.png",
+        "websiteURL": "https://aiready.plastorium.com/",
+        "supportURL": "https://aiready.plastorium.com/support",
+        "privacyPolicyURL": "https://aiready.plastorium.com/privacy",
+        "termsOfServiceURL": "https://aiready.plastorium.com/terms"
+      }
+    }
+  },
+  "name": "aiready",
+  "version": "0.22.0",
+  "license": "MIT"
+}

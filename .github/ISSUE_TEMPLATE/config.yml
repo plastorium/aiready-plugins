@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Account, data or billing
+    url: https://aiready.plastorium.com/support
+    about: Questions about your AIReady account go to support.
+  - name: Security problem
+    url: https://github.com/plastorium/aiready-plugins/security/advisories/new
+    about: Report security problems privately.
