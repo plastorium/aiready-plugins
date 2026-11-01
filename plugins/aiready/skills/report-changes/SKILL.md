@@ -87,11 +87,13 @@ step 7: it needs no period comparison first.
    changes, and non-comparable periods as each period's value with no delta.
    Per-scan detail: `visibility` view summary or engines with its `scanId`.
    Done when every number is on the comparable subset or labelled.
-4. **Competitors:** take the two scan IDs from the history points and call
-   `compare` once per `scanId`; compare the two results. Report observed
-   differences (share of voice, review count, rating, authority) with both
-   dates — what was observed, not what they did or why. Done when each
-   difference has both dates.
+4. **Competitors:** `compare` with view `changes` (AIReady
+   Advanced tool: `competitor_activity`): each competitor's observed changes between its
+   two latest analyses with both dates, posture, activity and a proposed
+   scan tier, most active first. Report what was observed, not what they
+   did or why; AI-answer presence is not compared across scans, so say so
+   rather than "no change". Name skipped rows and surfaces not compared.
+   Done when each change has both dates.
 5. **After completed work:** `did_it_work` (it takes the latest finished
    work's date, or the `since` the person gives); keep the five answers of
    plan-improvements apart. Done when each task's before and after are both

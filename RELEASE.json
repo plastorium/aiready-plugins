@@ -1,0 +1,14 @@
+{
+  "version": "0.22.0",
+  "releaseNotes": [
+    "Ask for a change in chat and it happens straight away; Claude tells you what it\ndid and what it cost. It still checks with you before deleting, sharing outside\nyour organization or spending half your remaining credits. On AIReady Advanced you can now tell the assistant what a brand is, for example \"that's a supplier, not a competitor\", and only real competitors are compared with you. The setup chat now asks once how your customers describe what they need, in their own words, and shows how many prompts that would add before saving. No change to the plugin. This adds an evaluation report only. No change to the plugin itself; it can now be measured on GPT through a ChatGPT subscription. No change to how the plugin behaves: more of what you can ask in chat, such as rewording or switching off a question, is now tested before each release. No change to the plugin. This adds an evaluation report only. Asked for help on a prepared business, the assistant now opens with the findings and offers one next step instead of a list of questions. Smaller assistants now open the matching AIReady skill before they answer, so its rules apply. Tell the assistant an old or second website is yours, and AIReady stops treating its pages as publications about you. Asking for a report over a quiet period now makes the report, from the latest check. Regenerating a content brief sends you a confirmation link instead of being refused. Asking to merge, rename or find competitors, to go deeper, or whether AI is costing you customers now reaches the right AIReady skill. Report checks are stricter: a monthly review must name the AI engine it measured, and wording that credits a change to your own work is flagged."
+  ],
+  "permissionChanges": [],
+  "migrations": [
+    {
+      "id": "retired-files-overlay",
+      "appliesTo": "chatgpt-update",
+      "description": "The ChatGPT update archive also carries harmless replacements for files that older versions installed and the host cannot delete (the retired guide-aiready skill and old eval files)."
+    }
+  ]
+}

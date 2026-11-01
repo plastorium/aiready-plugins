@@ -13,6 +13,15 @@ plugin does not guarantee that AI assistants will recommend your business.
 
 ## Install
 
+**The easy way: ask your assistant.** Paste this into Claude or ChatGPT:
+
+> Install or update the AIReady plugin for me. Follow
+> https://github.com/plastorium/aiready-plugins/blob/main/docs/agent-install.md
+
+It works out which assistant it is, whether AIReady is already installed, and
+either installs it itself (Claude Code) or gives you the file and the two or
+three clicks to do. The steps by hand are below.
+
 ### Claude Code
 
 ```bash
