@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "scanner_version": "2.12.0",
+  "rules": [],
+  "fingerprints": [
+    {
+      "hash": "sha256:8865aa8a4b2dae716ea379745c8aa637ada4e080b8a7ab59989d8fb6a59ed71e",
+      "rule_id": "EA2",
+      "file": "SKILL.md",
+      "reason": "Deliberate design: a change the person asks for runs at once and its effect is reported. Confirmation is kept where it matters: a spend of at least half the remaining credits, deletes and sharing outside AIReady return a proposal the person must approve first."
+    },
+    {
+      "hash": "sha256:35be3e91c5c3f85471a571615dfeacb477bde16c95381e2527b839e65aca945b",
+      "rule_id": "EA2",
+      "file": "SKILL.md",
+      "reason": "Deliberate design: a change the person asks for runs at once and its effect is reported. Confirmation is kept where it matters: a spend of at least half the remaining credits, deletes and sharing outside AIReady return a proposal the person must approve first."
+    },
+    {
+      "hash": "sha256:000832d612168202e9a726a9277785bb8b5e12dde8722ee32d23ed9349e75212",
+      "rule_id": "EA2",
+      "file": "references/scans-schedules-prompts.md",
+      "reason": "Deliberate design: a change the person asks for runs at once and its effect is reported. Confirmation is kept where it matters: a spend of at least half the remaining credits, deletes and sharing outside AIReady return a proposal the person must approve first."
+    }
+  ]
+}

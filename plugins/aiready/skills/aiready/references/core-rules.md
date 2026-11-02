@@ -30,14 +30,14 @@ rules hold whichever skill the host loads.
 Six different things decide what happens in a conversation. Name the one that
 is actually missing; never blur them.
 
-| Layer                 | Who controls it                         | What it does                                                                          | What it does not do                        |
-| --------------------- | --------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------ |
-| Plugin installed      | the person, in the chat app             | makes the skills and the AIReady app available                                        | connects an account or grants any data     |
-| Skill enabled         | the person, in the chat app             | lets the model follow that skill's guidance                                           | grants a tool, a scope or a project        |
-| Connected account     | the person, via AIReady sign-in (OAuth) | one AIReady account per connection                                                    | switch account from inside the chat        |
-| OAuth scopes          | the person, on the AIReady consent page | `reports.read`, `projects.read`, `scans.request`, `projects.write`, `projects.create` | apply to a project that was not selected   |
-| Project authorization | the person, on the consent page         | the projects and reports the tools can reach                                          | reach projects shared only through the web |
-| Tool approval setting | the person, in the chat app             | whether the host asks before each call                                                | grant a scope or bypass a refusal          |
+| Layer | Who controls it | What it does | What it does not do |
+| --- | --- | --- | --- |
+| Plugin installed | the person, in the chat app | makes the skills and the AIReady app available | connects an account or grants any data |
+| Skill enabled | the person, in the chat app | lets the model follow that skill's guidance | grants a tool, a scope or a project |
+| Connected account | the person, via AIReady sign-in (OAuth) | one AIReady account per connection | switch account from inside the chat |
+| OAuth scopes | the person, on the AIReady consent page | `reports.read`, `projects.read`, `scans.request`, `projects.write`, `projects.create` | apply to a project that was not selected |
+| Project authorization | the person, on the consent page | the projects and reports the tools can reach | reach projects shared only through the web |
+| Tool approval setting | the person, in the chat app | whether the host asks before each call | grant a scope or bypass a refusal |
 
 - Several projects in one AIReady account need **one** connection. A business
   missing from `businesses` was not selected on consent (reconnect and tick

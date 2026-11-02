@@ -6,31 +6,31 @@ AIReady works as three linked processes: **understand the business and market**,
 
 Once a business the person can read is resolved (`businesses`, needs `projects.read`), call `businesses` with it: it returns the same state and one primary action the web home shows (new, researching, early results, failed, baseline ready, actions chosen, awaiting check), its link, and the scope sentence of the latest check. Say the state in one sentence, quote the scope, and offer **one** next step — the result's `next` hints name it. With no business yet, or a report-only grant, use the rows below instead. The rows also cover states the web home has no equivalent for (No business, Needs input, Cycle ready, Limited).
 
-| State                 | How to recognise it from tools                                                              | Primary next step in chat                                                        |
-| --------------------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| **No business**       | no matching business in `businesses`                                                        | add it (`business_add`), then offer the first analysis                           |
-| **New**               | state `new`: the business exists but has never been checked                                 | follow its primary action (finish setup); never add a second one                 |
-| **Researching**       | `measure_status` not finished                                                               | show the stage and what is already available; do not start another measurement   |
-| **Needs input**       | a running analysis is blocked on a consequential question (identity, location, competitors) | ask at most three compact questions                                              |
-| **Early results**     | first observations exist but no completed comparative scan                                  | share them labelled early and provisional; no comparative advice yet             |
-| **Failed**            | state `failed`: the latest check ended with no result (failed or cancelled)                 | say it did not run and why; earlier results stay valid; offer its primary action |
-| **Baseline**          | a completed scan, no open plan tasks                                                        | answer the question; point to the top opportunities                              |
-| **Actions chosen**    | `next_steps` has open tasks                                                                 | show progress and the next task                                                  |
-| **Awaiting check**    | tasks are done but not verified                                                             | explain what is waiting for AIReady's re-check; do not claim improvement         |
-| **Cycle ready**       | a newer completed scan exists since the last one the person reviewed                        | what changed on the comparable subset, then the next task                        |
-| **Limited** (overlay) | quota exhausted, spend freeze, blocker in `measure_plan`, provider unavailable              | keep showing previous results; state the reason and what still works             |
+| State | How to recognise it from tools | Primary next step in chat |
+| --- | --- | --- |
+| **No business** | no matching business in `businesses` | add it (`business_add`), then offer the first analysis |
+| **New** | state `new`: the business exists but has never been checked | follow its primary action (finish setup); never add a second one |
+| **Researching** | `measure_status` not finished | show the stage and what is already available; do not start another measurement |
+| **Needs input** | a running analysis is blocked on a consequential question (identity, location, competitors) | ask at most three compact questions |
+| **Early results** | first observations exist but no completed comparative scan | share them labelled early and provisional; no comparative advice yet |
+| **Failed** | state `failed`: the latest check ended with no result (failed or cancelled) | say it did not run and why; earlier results stay valid; offer its primary action |
+| **Baseline** | a completed scan, no open plan tasks | answer the question; point to the top opportunities |
+| **Actions chosen** | `next_steps` has open tasks | show progress and the next task |
+| **Awaiting check** | tasks are done but not verified | explain what is waiting for AIReady's re-check; do not claim improvement |
+| **Cycle ready** | a newer completed scan exists since the last one the person reviewed | what changed on the comparable subset, then the next task |
+| **Limited** (overlay) | quota exhausted, spend freeze, blocker in `measure_plan`, provider unavailable | keep showing previous results; state the reason and what still works |
 
 Limited never hides earlier results. A failed refresh is reported with its reason; previous results stay valid for their own date.
 
 ## 2. Recognise the entry
 
-| Entry                                    | What the person has                                           | What chat does                                                                                                                                                                                                                        |
-| ---------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **A. New self-service**                  | a URL or business name                                        | find or add the business; the URL is enough to start; ask only questions that change identity, relevance or cost; offer the first analysis with its scope and cost                                                                    |
-| **B. Prepared analysis / shared report** | a `reports.read` grant or a report link                       | open the report immediately with its date and scope (`reports` with the report, which returns its evidence); opening never starts research; reading a report is not project access, and the reader is not assumed to own the business |
-| **C. Returning user**                    | businesses with history                                       | open on what changed, what needs attention, what is in progress, what is confirmed, what to do next; never restart onboarding                                                                                                         |
-| **D. From chat itself**                  | an existing web project                                       | continue at the same business, scan or task the person refers to; give web links to the same objects                                                                                                                                  |
-| **E. Invited participant**               | report recipient, project collaborator or organisation member | keep these roles apart; an invitation never triggers research. Projects shared only through a web access grant may not be reachable from chat yet: say so and give the web link instead of guessing                                   |
+| Entry | What the person has | What chat does |
+| --- | --- | --- |
+| **A. New self-service** | a URL or business name | find or add the business; the URL is enough to start; ask only questions that change identity, relevance or cost; offer the first analysis with its scope and cost |
+| **B. Prepared analysis / shared report** | a `reports.read` grant or a report link | open the report immediately with its date and scope (`reports` with the report, which returns its evidence); opening never starts research; reading a report is not project access, and the reader is not assumed to own the business |
+| **C. Returning user** | businesses with history | open on what changed, what needs attention, what is in progress, what is confirmed, what to do next; never restart onboarding |
+| **D. From chat itself** | an existing web project | continue at the same business, scan or task the person refers to; give web links to the same objects |
+| **E. Invited participant** | report recipient, project collaborator or organisation member | keep these roles apart; an invitation never triggers research. Projects shared only through a web access grant may not be reachable from chat yet: say so and give the web link instead of guessing |
 
 ## 3. Journeys (IDs match the product's journey catalogue)
 

@@ -20,12 +20,12 @@ not `compare`.
 
 ## Observed benchmark vs model-estimated target
 
-|                  | Observed benchmark                                                                                             | Model-estimated target                                                                                                         |
-| ---------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| What it is       | the values relevant competitors actually have                                                                  | a value a model associates with higher visibility                                                                              |
-| Source in chat   | `compare`                                                                                                      | `visibility` view drivers: a driver row's target levels and the `prediction`, only as returned                                 |
-| How to present   | every value, plus the median once at least five competitors have one (quartiles from eight), scan date, cohort | only if a tool result or pasted material contains it, with model scope, outcome definition, provider, coverage and uncertainty |
-| What it never is | a threshold that makes AI recommend the business                                                               | a promise; a causal effect; valid for another provider or location                                                             |
+|  | Observed benchmark | Model-estimated target |
+| --- | --- | --- |
+| What it is | the values relevant competitors actually have | a value a model associates with higher visibility |
+| Source in chat | `compare` | `visibility` view drivers: a driver row's target levels and the `prediction`, only as returned |
+| How to present | every value, plus the median once at least five competitors have one (quartiles from eight), scan date, cohort | only if a tool result or pasted material contains it, with model scope, outcome definition, provider, coverage and uncertainty |
+| What it never is | a threshold that makes AI recommend the business | a promise; a causal effect; valid for another provider or location |
 
 ## "How many reviews do I need?" (Yelp, Google, any platform)
 

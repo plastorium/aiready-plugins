@@ -1,5 +1,8 @@
 # AIReady plugins
 
+[![Security scan](https://github.com/plastorium/aiready-plugins/actions/workflows/security.yml/badge.svg)](https://github.com/plastorium/aiready-plugins/actions/workflows/security.yml)
+[![Validate plugin](https://github.com/plastorium/aiready-plugins/actions/workflows/validate.yml/badge.svg)](https://github.com/plastorium/aiready-plugins/actions/workflows/validate.yml)
+
 [AIReady](https://aiready.plastorium.com/) shows whether AI assistants
 (ChatGPT, Perplexity, Gemini and others) mention your business when people ask
 about what it offers, how it compares with competitors, and what to improve
@@ -74,7 +77,30 @@ servers with OAuth can connect without the plugin; see
 | `plugins/aiready/.codex-plugin/`  | Codex / ChatGPT plugin manifest                                                                                    |
 | `plugins/aiready/plugin.json`     | agent-plugins manifest                                                                                             |
 | `.claude-plugin/marketplace.json` | Claude Code marketplace catalog                                                                                    |
+| `security/`                       | accepted security-scan findings, each with its reason                                                              |
 | `VERSION`                         | the released plugin version; each release is a `v<version>` tag and GitHub release with the ZIPs and their SHA-256 |
+
+## Security
+
+The skills are plain Markdown instructions and five small helper scripts; the
+plugin runs no code on your computer beyond those scripts, which read their
+input and print a result. Three public scanners check every change, every push
+and every week ([Security scan](.github/workflows/security.yml)):
+
+- [Cisco skill-scanner](https://github.com/cisco-ai-defense/skill-scanner):
+  prompt injection, data exfiltration, malicious code.
+- [NVIDIA SkillSpector](https://github.com/NVIDIA/SkillSpector), static mode:
+  injection, exfiltration, privilege escalation, MCP tool poisoning, YARA and
+  taint checks.
+- `claude plugin validate --profile directory`: Anthropic's plugin directory
+  rules.
+
+The scanners run without an API key and call no model. SkillSpector reports a
+few things by design, for example that a change the person asks for runs
+without a second confirmation. Each accepted finding is listed, with its
+reason, in [security/skillspector-baselines/](https://github.com/plastorium/aiready-plugins/tree/main/security/skillspector-baselines);
+any other finding fails the scan. Spending a large share of your credits,
+deleting, and sharing data outside AIReady always ask you first.
 
 ## Support
 

@@ -75,7 +75,7 @@ function parseNum(text) {
     dec = m[2] ?? "";
   }
   return {
-    value: Number(dec ? `${intPart}.${dec}` : intPart),
+    value: Number(dec ? intPart + "." + dec : intPart),
     decimals: dec.length,
   };
 }
@@ -88,12 +88,19 @@ const TOD_RE = /(?<![\d:+\-−])([01]?\d|2[0-3]):[0-5]\d(?::[0-5]\d)?(?![\d:])/g
 // Written dates ("20 Sep 2026", "Sep 20, 2026", "20 сентября"): masked in the
 // draft so their parts are not number claims; never added to the source pool.
 const MONTH_WORD = String.raw`(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?|(?:январ|феврал|март|апрел|ма[йя]|июн|июл|август|сентябр|октябр|ноябр|декабр)\p{L}*`;
-const WRITTEN_DATE_SRC = String.raw`(?<![\p{L}\d])(?:\d{1,2}\s+(?:${MONTH_WORD})(?:\s+\d{4})?|(?:${MONTH_WORD})\s+\d{1,2}(?:,?\s+\d{4})?)(?![\p{L}\d])`;
+const WRITTEN_DATE_SRC =
+  String.raw`(?<![\p{L}\d])(?:\d{1,2}\s+(?:` +
+  MONTH_WORD +
+  String.raw`)(?:\s+\d{4})?|(?:` +
+  MONTH_WORD +
+  String.raw`)\s+\d{1,2}(?:,?\s+\d{4})?)(?![\p{L}\d])`;
 
 // A four-digit number is a year only in one of these contexts (otherwise it is a number claim).
 const MONTH_CTX = String.raw`(?<!\p{L})(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|june?|july?|aug(?:ust)?|sept?(?:ember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\.?|(?<!\p{L})(?:январ|феврал|март|апрел|ма[йя]|июн|июл|август|сентябр|октябр|ноябр|декабр)\p{L}*`;
 const YEAR_BEFORE = new RegExp(
-  String.raw`(?:(?<!\p{L})(?:in|since|from|by|until|through|during|в|с|до|по|за)|${MONTH_CTX})\.?,?\s+$`,
+  String.raw`(?:(?<!\p{L})(?:in|since|from|by|until|through|during|в|с|до|по|за)|` +
+    MONTH_CTX +
+    String.raw`)\.?,?\s+$`,
   "iu",
 );
 const YEAR_AFTER = /^(?:-\d{2}(?!\d)|\s*(?:г\.|год(?:а|у)?(?!\p{L})))/iu;
@@ -125,9 +132,13 @@ function writtenDateSupported(text, dates) {
   const nums = (lower.match(/\d+/g) ?? []).map(Number);
   const year = nums.find((n) => n >= 1900);
   const day = nums.find((n) => n >= 1 && n <= 31);
-  const mmdd = `-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+  const mmdd =
+    "-" +
+    String(month + 1).padStart(2, "0") +
+    "-" +
+    String(day).padStart(2, "0");
   for (const d of dates) {
-    if (d.endsWith(mmdd) && (year === undefined || d.startsWith(`${year}-`)))
+    if (d.endsWith(mmdd) && (year === undefined || d.startsWith(year + "-")))
       return true;
   }
   return false;
@@ -158,7 +169,7 @@ function collectString(str, acc) {
   });
   // A sign counts only when it is not glued to a word or digit ("x-24" is not -24).
   const numRe = new RegExp(
-    String.raw`(?:(?<![\p{L}\d])([+\-−]))?(${NUM})`,
+    String.raw`(?:(?<![\p{L}\d])([+\-−]))?(` + NUM + String.raw`)`,
     "gu",
   );
   for (const m of stripped.matchAll(numRe)) {
@@ -237,7 +248,7 @@ function isYearContext(text, m) {
 }
 
 // A sign counts only when no letter or digit precedes it ("10-20" is a range). Earlier matches are
-// already blanked in `cur`, so this reads `prose`, which keeps every index.
+// already blanked in "cur", so this reads "prose", which keeps every index.
 function claimSign(m, prose) {
   const sign = m[1] ?? "";
   return sign && !/[\p{L}\d]/u.test(prose[m.index - 1] ?? "") ? sign : "";
@@ -334,7 +345,14 @@ export function lintAnswer(input) {
 
   cur = scan(
     new RegExp(
-      String.raw`${PRE}(${NUM})\s*(?:из|of|out\s+of)\s*(${NUM})${POST}`,
+      "" +
+        PRE +
+        String.raw`(` +
+        NUM +
+        String.raw`)\s*(?:из|of|out\s+of)\s*(` +
+        NUM +
+        String.raw`)` +
+        POST,
       "giu",
     ),
     cur,
@@ -356,7 +374,11 @@ export function lintAnswer(input) {
 
   cur = scan(
     new RegExp(
-      String.raw`${PRE}([+\-−]?)(${NUM})\s*(?:pp|п\.\s?п\.)(?!\p{L})`,
+      "" +
+        PRE +
+        String.raw`([+\-−]?)(` +
+        NUM +
+        String.raw`)\s*(?:pp|п\.\s?п\.)(?!\p{L})`,
       "giu",
     ),
     cur,
@@ -373,7 +395,10 @@ export function lintAnswer(input) {
   );
 
   cur = scan(
-    new RegExp(String.raw`${PRE}([+\-−]?)(${NUM})\s*%`, "giu"),
+    new RegExp(
+      "" + PRE + String.raw`([+\-−]?)(` + NUM + String.raw`)\s*%`,
+      "giu",
+    ),
     cur,
     (m) => {
       const sign = claimSign(m, prose);
@@ -388,7 +413,10 @@ export function lintAnswer(input) {
   );
 
   scan(
-    new RegExp(String.raw`${PRE}([+\-−]?)(${NUM})${POST}`, "giu"),
+    new RegExp(
+      "" + PRE + String.raw`([+\-−]?)(` + NUM + String.raw`)` + POST,
+      "giu",
+    ),
     cur,
     (m, text) => {
       const sign = claimSign(m, prose);
@@ -443,7 +471,7 @@ export function lintAnswer(input) {
   return result;
 }
 
-// Run main() only when this file is the entry point. `import.meta.main`
+// Run main() only when this file is the entry point. "import.meta.main"
 // (Node 22.18+) answers that exactly. Older Node falls back to comparing
 // paths: import.meta.url reads file:///C:/x on Windows while argv[1] reads
 // C:\x, so normalize both spellings before comparing.
@@ -469,11 +497,15 @@ async function main() {
     process.stdin.setEncoding("utf8");
     for await (const chunk of process.stdin) raw += chunk;
     const input = JSON.parse(raw);
-    process.stdout.write(`${JSON.stringify(lintAnswer(input))}\n`);
+    process.stdout.write(String(JSON.stringify(lintAnswer(input))) + "\n");
     process.exitCode = 0;
   } catch (err) {
     process.stdout.write(
-      `${JSON.stringify({ error: err instanceof Error ? err.message : String(err) })}\n`,
+      String(
+        JSON.stringify({
+          error: err instanceof Error ? err.message : String(err),
+        }),
+      ) + "\n",
     );
     process.exitCode = 1;
   }

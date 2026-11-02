@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "scanner_version": "2.12.0",
+  "rules": [],
+  "fingerprints": [
+    {
+      "hash": "sha256:1650267997778b9b62fb9ddc3f1a6b53086e283b8d016a59b329470b1cbd07c5",
+      "rule_id": "EA2",
+      "file": "SKILL.md",
+      "reason": "Deliberate design: a change the person asks for runs at once and its effect is reported. Confirmation is kept where it matters: a spend of at least half the remaining credits, deletes and sharing outside AIReady return a proposal the person must approve first."
+    }
+  ]
+}

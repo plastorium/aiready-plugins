@@ -22,13 +22,13 @@ Use recorded citations, answer text and dated source facts. Separate sources act
 
 ## 3. Failed, partial and unmeasured
 
-| Situation                                    | Say                                                                          | Never say                                |
-| -------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------- |
-| a check or engine failed or was skipped      | it did not run (reason if given); earlier results stay valid for their date  | "no visibility", "you failed this check" |
-| a provider was unavailable                   | that engine was not checked in this scan                                     | a 0% rate for it                         |
-| the crawl returned zero pages                | the site could not be read, so site-based findings are missing, not negative | "your site has no content / schema"      |
-| scan still running or partial                | the stage, what is already available (labelled early), what is still missing | a final verdict                          |
-| answers contradict each other or the profile | show both with engine, source and date; say which fact the profile holds     | pick one silently                        |
+| Situation | Say | Never say |
+| --- | --- | --- |
+| a check or engine failed or was skipped | it did not run (reason if given); earlier results stay valid for their date | "no visibility", "you failed this check" |
+| a provider was unavailable | that engine was not checked in this scan | a 0% rate for it |
+| the crawl returned zero pages | the site could not be read, so site-based findings are missing, not negative | "your site has no content / schema" |
+| scan still running or partial | the stage, what is already available (labelled early), what is still missing | a final verdict |
+| answers contradict each other or the profile | show both with engine, source and date; say which fact the profile holds | pick one silently |
 
 Comparisons with competitors: compare-competitors. What to do: plan-improvements. Change over time: report-changes.
 

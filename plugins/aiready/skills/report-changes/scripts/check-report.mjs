@@ -112,14 +112,24 @@ function dayNear(draft, index, length) {
 
 function periodsNamed(draft) {
   const found = new Set();
-  for (const m of draft.matchAll(ISO_RE)) found.add(`date:${m[0]}`);
+  for (const m of draft.matchAll(ISO_RE)) found.add("date:" + String(m[0]));
   // A month with a day is a date, so March 1 and March 31 are two periods.
   for (const m of draft.matchAll(MONTH_RE))
     found.add(
-      `month:${yearNear(draft, m.index, m[0].length)}-${monthIndex(m[0])}-${dayNear(draft, m.index, m[0].length)}`,
+      "month:" +
+        String(yearNear(draft, m.index, m[0].length)) +
+        "-" +
+        String(monthIndex(m[0])) +
+        "-" +
+        String(dayNear(draft, m.index, m[0].length)),
     );
   for (const m of draft.matchAll(QUARTER_RE))
-    found.add(`quarter:${yearNear(draft, m.index, m[0].length)}-${m[1]}`);
+    found.add(
+      "quarter:" +
+        String(yearNear(draft, m.index, m[0].length)) +
+        "-" +
+        String(m[1]),
+    );
   // A month read without a day may be the same date in another sentence
   // shape (March 1 and March 1 in …), so it is a period of its own only
   // when no dated mention of that month exists.
@@ -160,8 +170,13 @@ function periodCheck(draft, kind) {
   return check(
     "period",
     periods >= needed,
-    `names ${periods} period(s)`,
-    `names ${periods} period(s); a ${kind} needs at least ${needed}`,
+    "names " + String(periods) + " period(s)",
+    "names " +
+      String(periods) +
+      " period(s); a " +
+      String(kind) +
+      " needs at least " +
+      String(needed),
   );
 }
 
@@ -182,8 +197,9 @@ function percentsWithoutCountIn(draft) {
 
 function denominatorCheck(draft, missing) {
   const detail = has(COUNT_RE, draft)
-    ? `${missing.length} percentage(s) lack a count in their sentence, but the draft has counts`
-    : `percentages without a count: ${missing.join(", ")}`;
+    ? String(missing.length) +
+      " percentage(s) lack a count in their sentence, but the draft has counts"
+    : "percentages without a count: " + String(missing.join(", "));
   return check(
     "denominator",
     missing.length === 0,
@@ -241,7 +257,7 @@ export function checkReport(input) {
       "no_causation",
       causalPhrases.length === 0,
       "no causal wording",
-      `causal wording: ${causalPhrases.join(", ")}`,
+      "causal wording: " + String(causalPhrases.join(", ")),
     ),
   ];
   return {
@@ -252,7 +268,7 @@ export function checkReport(input) {
   };
 }
 
-// Run main() only when this file is the entry point. `import.meta.main`
+// Run main() only when this file is the entry point. "import.meta.main"
 // (Node 22.18+) answers that exactly. Older Node falls back to comparing
 // paths: import.meta.url reads file:///C:/x on Windows while argv[1] reads
 // C:\x, so normalize both spellings before comparing.
@@ -278,11 +294,15 @@ async function main() {
     process.stdin.setEncoding("utf8");
     for await (const chunk of process.stdin) raw += chunk;
     const input = JSON.parse(raw);
-    process.stdout.write(`${JSON.stringify(checkReport(input))}\n`);
+    process.stdout.write(String(JSON.stringify(checkReport(input))) + "\n");
     process.exitCode = 0;
   } catch (err) {
     process.stdout.write(
-      `${JSON.stringify({ error: err instanceof Error ? err.message : String(err) })}\n`,
+      String(
+        JSON.stringify({
+          error: err instanceof Error ? err.message : String(err),
+        }),
+      ) + "\n",
     );
     process.exitCode = 1;
   }

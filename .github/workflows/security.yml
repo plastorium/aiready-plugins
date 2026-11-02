@@ -1,0 +1,89 @@
+# Public security scans of the skills, on every push, pull request and weekly.
+# Static analysis only: no scanner gets an API key or calls a model.
+#
+#   - Cisco skill-scanner (github.com/cisco-ai-defense/skill-scanner):
+#     prompt injection, data exfiltration, malicious code; fails on high.
+#   - NVIDIA SkillSpector (github.com/NVIDIA/SkillSpector), --no-llm: fails
+#     on any finding outside security/skillspector-baselines/, where every
+#     accepted finding carries its reason.
+#   - claude plugin validate --profile directory: Anthropic directory rules.
+#
+# Each scanner's report is on the run page and uploaded as an artifact.
+name: Security scan
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "43 6 * * 2"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      SKILLS: plugins/aiready/skills
+      SKILLSPECTOR_BASELINES: security/skillspector-baselines
+      CISCO_SKILL_SCANNER_VERSION: "2.3.2"
+      # NVIDIA/skillspector main as of 2026-11-02 (reports v2.12.0).
+      SKILLSPECTOR_REF: 6d0b7c849949cab9181e57798247f89e48ce5d6a
+      CLAUDE_CODE_VERSION: "2.1.316"
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: 22
+
+      - name: Install scanners
+        run: |
+          set -euo pipefail
+          pipx install "cisco-ai-skill-scanner==${CISCO_SKILL_SCANNER_VERSION}"
+          pipx install "git+https://github.com/NVIDIA/skillspector.git@${SKILLSPECTOR_REF}"
+          npm install --global "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}"
+          mkdir -p reports
+          pipx list --short
+
+      - name: Cisco skill-scanner
+        run: |
+          set -euo pipefail
+          status=0
+          skill-scanner scan-all "$SKILLS" --recursive \
+            --format markdown --output reports/cisco-skill-scanner.md \
+            --fail-on-severity high || status=$?
+          cat reports/cisco-skill-scanner.md >> "$GITHUB_STEP_SUMMARY" || true
+          exit "$status"
+
+      - name: NVIDIA SkillSpector (static, no LLM)
+        if: ${{ !cancelled() }}
+        run: |
+          set -euo pipefail
+          status=0
+          for dir in "$SKILLS"/*/; do
+            skill="$(basename "$dir")"
+            args=()
+            [ -f "$SKILLSPECTOR_BASELINES/$skill.json" ] && args=(--baseline "$SKILLSPECTOR_BASELINES/$skill.json" --show-suppressed)
+            skillspector scan "$dir" --no-llm "${args[@]}" --fail-on-findings | tee -a reports/skillspector.txt || status=1
+          done
+          { echo "### NVIDIA SkillSpector"; echo; echo '```'; cat reports/skillspector.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      - name: Claude plugin directory checks
+        if: ${{ !cancelled() }}
+        run: |
+          set -euo pipefail
+          claude plugin validate plugins/aiready --profile directory | tee reports/claude-directory.txt
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: ${{ !cancelled() }}
+        with:
+          name: security-reports
+          path: reports/
+          retention-days: 30

@@ -1,0 +1,43 @@
+{
+  "version": 2,
+  "scanner_version": "2.12.0",
+  "rules": [],
+  "fingerprints": [
+    {
+      "hash": "sha256:b105730f2dd216538749b2ba50d4e9d8e0507b2ddf6f3a6d2a00b7030ada4eb4",
+      "rule_id": "EA2",
+      "file": "SKILL.md",
+      "reason": "Deliberate design: a change the person asks for runs at once and its effect is reported. Confirmation is kept where it matters: a spend of at least half the remaining credits, deletes and sharing outside AIReady return a proposal the person must approve first."
+    },
+    {
+      "hash": "sha256:cd531815d95763546d8e36f4a09c579a62ae6be1aeb8c4a463271b47d32cb3dc",
+      "rule_id": "EA2",
+      "file": "references/mcp-workflows.md",
+      "reason": "Deliberate design: a change the person asks for runs at once and its effect is reported. Confirmation is kept where it matters: a spend of at least half the remaining credits, deletes and sharing outside AIReady return a proposal the person must approve first."
+    },
+    {
+      "hash": "sha256:f880813e4e00ce4fbc2038d27d6850a33691cc7f57430d2a3dbc3283a64d5870",
+      "rule_id": "EA2",
+      "file": "references/mcp-workflows.md",
+      "reason": "Deliberate design: a change the person asks for runs at once and its effect is reported. Confirmation is kept where it matters: a spend of at least half the remaining credits, deletes and sharing outside AIReady return a proposal the person must approve first."
+    },
+    {
+      "hash": "sha256:d6ab69707e56434cefb0ffbe67a534cb5434f8e645968a720713bd2eb79b5513",
+      "rule_id": "AE1",
+      "file": "SKILL.md",
+      "reason": "Plain text the scanner cannot fully read, not hidden content: a bounded static parser stops early in a regex-heavy helper script, or flags a dense reference table as obfuscated text. Rewrites of the reported lines did not clear it (2026-11). The files are in this public repository for review."
+    },
+    {
+      "hash": "sha256:60c9fe8bdaab3d03779abf2ef34c8c5bfd189a773528494041ef7028231e5ac6",
+      "rule_id": "AE1",
+      "file": "SKILL.md",
+      "reason": "Plain text the scanner cannot fully read, not hidden content: a bounded static parser stops early in a regex-heavy helper script, or flags a dense reference table as obfuscated text. Rewrites of the reported lines did not clear it (2026-11). The files are in this public repository for review."
+    },
+    {
+      "hash": "sha256:6de9b097a0f41987395574a948757e12193c0f6fcdcb2cec40b94f2d21fe87c8",
+      "rule_id": "AE1",
+      "file": "SKILL.md",
+      "reason": "Plain text the scanner cannot fully read, not hidden content: a bounded static parser stops early in a regex-heavy helper script, or flags a dense reference table as obfuscated text. Rewrites of the reported lines did not clear it (2026-11). The files are in this public repository for review."
+    }
+  ]
+}

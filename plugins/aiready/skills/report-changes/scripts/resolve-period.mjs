@@ -39,15 +39,15 @@ const fromDay = (n) => {
 const pad = (n) => String(n).padStart(2, "0");
 const isoOf = (n) => {
   const [y, m, d] = fromDay(n);
-  return `${y}-${pad(m)}-${pad(d)}`;
+  return String(y) + "-" + String(pad(m)) + "-" + String(pad(d));
 };
 const shortDate = (n) => {
   const [y, m, d] = fromDay(n);
-  return `${MONTH_ABBR[m - 1]} ${d}, ${y}`;
+  return String(MONTH_ABBR[m - 1]) + " " + String(d) + ", " + String(y);
 };
 const monthLabel = (n) => {
   const [y, m] = fromDay(n);
-  return `${MONTHS[m - 1]} ${y}`;
+  return String(MONTHS[m - 1]) + " " + String(y);
 };
 
 // First day of month (m may be out of 1..12; normalized through year arithmetic).
@@ -83,7 +83,7 @@ const localDay = (ms, timeZone) => {
       day: "2-digit",
     });
   } catch {
-    throw new Error(`invalid timeZone: ${timeZone}`);
+    throw new Error("invalid timeZone: " + String(timeZone));
   }
   const parts = Object.fromEntries(
     fmt.formatToParts(new Date(ms)).map((p) => [p.type, p.value]),
@@ -109,8 +109,23 @@ const wallParts = (ms, timeZone) => {
     fmt.formatToParts(new Date(ms)).map((x) => [x.type, x.value]),
   );
   const mt = /GMT([+-])(\d{2}):?(\d{2})?/.exec(p.timeZoneName);
-  const off = mt ? `${mt[1]}${mt[2]}:${mt[3] ?? "00"}` : "+00:00";
-  return `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}:${p.second}${off}`;
+  const off = mt
+    ? String(mt[1]) + String(mt[2]) + ":" + String(mt[3] ?? "00")
+    : "+00:00";
+  return (
+    String(p.year) +
+    "-" +
+    String(p.month) +
+    "-" +
+    String(p.day) +
+    "T" +
+    String(p.hour) +
+    ":" +
+    String(p.minute) +
+    ":" +
+    String(p.second) +
+    String(off)
+  );
 };
 // First real instant of local day n: binary search over UTC seconds, so a day
 // whose midnight is skipped by a DST jump starts at the jump (e.g. 01:00).
@@ -125,7 +140,7 @@ const startOfDay = (n, timeZone) => {
   }
   return wallParts(lo * 1000, timeZone);
 };
-// `to` is exclusive (the server compares with `lt`): the first instant of the
+// "to" is exclusive (the server compares with "lt"): the first instant of the
 // day after the range, so the range's last second is included.
 const instants = (span, timeZone) => ({
   from: startOfDay(span.from, timeZone),
@@ -141,7 +156,8 @@ function ranges(period, today) {
     return {
       cur,
       prev,
-      label: `${monthLabel(cur.from)} vs ${monthLabel(prev.from)}`,
+      label:
+        String(monthLabel(cur.from)) + " vs " + String(monthLabel(prev.from)),
     };
   }
   if (period === "this_month") {
@@ -154,7 +170,10 @@ function ranges(period, today) {
     return {
       cur,
       prev,
-      label: `${monthLabel(cur.from)} to date vs ${monthLabel(prev.from)}`,
+      label:
+        String(monthLabel(cur.from)) +
+        " to date vs " +
+        String(monthLabel(prev.from)),
     };
   }
   if (period === "last_week") {
@@ -164,14 +183,25 @@ function ranges(period, today) {
     return {
       cur,
       prev,
-      label: `${shortDate(cur.from)} to ${shortDate(cur.to)} vs ${shortDate(prev.from)} to ${shortDate(prev.to)}`,
+      label:
+        String(shortDate(cur.from)) +
+        " to " +
+        String(shortDate(cur.to)) +
+        " vs " +
+        String(shortDate(prev.from)) +
+        " to " +
+        String(shortDate(prev.to)),
     };
   }
   if (period in N_DAYS) {
     const n = N_DAYS[period];
     const cur = { from: today - n, to: today - 1 };
     const prev = { from: today - 2 * n, to: today - n - 1 };
-    return { cur, prev, label: `Last ${n} days vs previous ${n} days` };
+    return {
+      cur,
+      prev,
+      label: "Last " + String(n) + " days vs previous " + String(n) + " days",
+    };
   }
   // last_quarter
   const absQ = Y * 4 + Math.floor((M - 1) / 3);
@@ -182,7 +212,15 @@ function ranges(period, today) {
   return {
     cur,
     prev,
-    label: `Q${Math.floor((cm - 1) / 3) + 1} ${cy} vs Q${Math.floor((pm - 1) / 3) + 1} ${py}`,
+    label:
+      "Q" +
+      String(Math.floor((cm - 1) / 3) + 1) +
+      " " +
+      String(cy) +
+      " vs Q" +
+      String(Math.floor((pm - 1) / 3) + 1) +
+      " " +
+      String(py),
   };
 }
 
@@ -201,7 +239,7 @@ export function resolvePeriod(input) {
   if (typeof timeZone !== "string" || timeZone.length === 0)
     throw new Error("timeZone must be an IANA zone name");
   if (!PERIODS.has(period))
-    throw new Error(`unknown period: ${String(period)}`);
+    throw new Error("unknown period: " + String(period));
 
   const today = localDay(ms, timeZone);
   const { cur, prev, label } = ranges(period, today);
@@ -210,7 +248,7 @@ export function resolvePeriod(input) {
     today: isoOf(today),
     current: { from: isoOf(cur.from), to: isoOf(cur.to) },
     previous: { from: isoOf(prev.from), to: isoOf(prev.to) },
-    // Ready for `visibility` view history `compare`, which takes date-times.
+    // Ready for "visibility" view history "compare", which takes date-times.
     compare: {
       current: instants(cur, timeZone),
       previous: instants(prev, timeZone),
@@ -234,11 +272,11 @@ function main() {
       out = { error: err instanceof Error ? err.message : String(err) };
       process.exitCode = 1;
     }
-    process.stdout.write(`${JSON.stringify(out)}\n`);
+    process.stdout.write(String(JSON.stringify(out)) + "\n");
   });
 }
 
-// Run main() only when this file is the entry point. `import.meta.main`
+// Run main() only when this file is the entry point. "import.meta.main"
 // (Node 22.18+) answers that exactly. Older Node falls back to comparing
 // paths: import.meta.url reads file:///C:/x on Windows while argv[1] reads
 // C:\x, so normalize both spellings before comparing.

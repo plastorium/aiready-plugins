@@ -90,12 +90,12 @@ function cellText(field, value) {
 // Spreadsheets run a cell that starts like a formula; a leading apostrophe stops that.
 const FORMULA_START = /^[=+\-@\t\r]/;
 function guard(text) {
-  return FORMULA_START.test(text) ? `'${text}` : text;
+  return FORMULA_START.test(text) ? "'" + String(text) : text;
 }
 
 function csvCell(text) {
   const safe = guard(text);
-  return /[",\r\n]/.test(safe) ? `"${safe.replace(/"/g, '""')}"` : safe;
+  return /[",\r\n]/.test(safe) ? '"' + safe.replace(/"/g, '""') + '"' : safe;
 }
 
 function tsvCell(text) {
@@ -108,7 +108,7 @@ function mdCell(text) {
 
 function render(format, headers, rows) {
   if (format === "markdown") {
-    const line = (cells) => `| ${cells.map(mdCell).join(" | ")} |`;
+    const line = (cells) => "| " + cells.map(mdCell).join(" | ") + " |";
     const divider = headers.map(() => "---");
     return [line(headers), line(divider), ...rows.map(line)].join("\n") + "\n";
   }
@@ -127,7 +127,7 @@ export function exportPlan(input) {
   }
   const { tasks, format, columns, locale } = input;
   if (!FORMATS.includes(format)) {
-    throw new Error(`format must be one of: ${FORMATS.join(", ")}`);
+    throw new Error("format must be one of: " + FORMATS.join(", "));
   }
   const lang = locale ?? "en";
   if (typeof lang !== "string" || !Object.hasOwn(LOCALES, lang)) {
@@ -138,11 +138,11 @@ export function exportPlan(input) {
     throw new Error("columns must be a non-empty array");
   }
   for (const c of cols) {
-    if (!COLUMNS.includes(c)) throw new Error(`unknown column: ${String(c)}`);
+    if (!COLUMNS.includes(c)) throw new Error("unknown column: " + String(c));
   }
   if (!Array.isArray(tasks)) throw new Error("tasks must be an array");
   if (tasks.length > MAX_TASKS) {
-    throw new Error(`at most ${MAX_TASKS} tasks; got ${tasks.length}`);
+    throw new Error("at most " + MAX_TASKS + " tasks; got " + tasks.length);
   }
 
   const labels = LOCALES[lang];
@@ -165,7 +165,7 @@ export function exportPlan(input) {
   };
 }
 
-// Run main() only when this file is the entry point. `import.meta.main`
+// Run main() only when this file is the entry point. "import.meta.main"
 // (Node 22.18+) answers that exactly. Older Node falls back to comparing
 // paths: import.meta.url reads file:///C:/x on Windows while argv[1] reads
 // C:\x, so normalize both spellings before comparing.
@@ -191,11 +191,15 @@ async function main() {
     process.stdin.setEncoding("utf8");
     for await (const chunk of process.stdin) raw += chunk;
     const input = JSON.parse(raw);
-    process.stdout.write(`${JSON.stringify(exportPlan(input))}\n`);
+    process.stdout.write(String(JSON.stringify(exportPlan(input))) + "\n");
     process.exitCode = 0;
   } catch (err) {
     process.stdout.write(
-      `${JSON.stringify({ error: err instanceof Error ? err.message : String(err) })}\n`,
+      String(
+        JSON.stringify({
+          error: err instanceof Error ? err.message : String(err),
+        }),
+      ) + "\n",
     );
     process.exitCode = 1;
   }

@@ -97,7 +97,7 @@ function normalizeUrl(raw) {
   if (!s) return { url: null, domain: null, bad: false };
   const bad = { url: s, domain: null, bad: true };
   if (/\s/.test(s)) return bad;
-  const withScheme = /^[a-z][a-z0-9+.-]*:\/\//i.test(s) ? s : `https://${s}`;
+  const withScheme = /^[a-z][a-z0-9+.-]*:\/\//i.test(s) ? s : "https://" + s;
   const m = URL_PARTS_RE.exec(withScheme);
   if (!m) return bad;
   const host = m[2].replace(/:\d+$/, "").toLowerCase();
@@ -105,7 +105,7 @@ function normalizeUrl(raw) {
   const path = (m[3] ?? "").replace(/\/+$/, "");
   const query = m[4] ?? "";
   return {
-    url: `${m[1].toLowerCase()}://${host}${path}${query}`,
+    url: m[1].toLowerCase() + "://" + host + path + query,
     domain: host.replace(/^www\./, ""),
     bad: false,
   };
@@ -304,7 +304,7 @@ export function parseList(input) {
   return { kind, ...result };
 }
 
-// Run main() only when this file is the entry point. `import.meta.main`
+// Run main() only when this file is the entry point. "import.meta.main"
 // (Node 22.18+) answers that exactly. Older Node falls back to comparing
 // paths: import.meta.url reads file:///C:/x on Windows while argv[1] reads
 // C:\x, so normalize both spellings before comparing.
@@ -330,11 +330,13 @@ async function main() {
     process.stdin.setEncoding("utf8");
     for await (const chunk of process.stdin) raw += chunk;
     const input = JSON.parse(raw);
-    process.stdout.write(`${JSON.stringify(parseList(input))}\n`);
+    process.stdout.write(JSON.stringify(parseList(input)) + "\n");
     process.exitCode = 0;
   } catch (err) {
     process.stdout.write(
-      `${JSON.stringify({ error: err instanceof Error ? err.message : String(err) })}\n`,
+      JSON.stringify({
+        error: err instanceof Error ? err.message : String(err),
+      }) + "\n",
     );
     process.exitCode = 1;
   }

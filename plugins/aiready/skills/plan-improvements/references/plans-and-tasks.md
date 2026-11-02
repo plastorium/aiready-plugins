@@ -2,12 +2,12 @@
 
 ## What chat can read
 
-| Source                                   | Contains                                                                                                                                                                                                     | Does not contain                                                 |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
-| `next_steps` → recommendations           | `recommendationId`, `priorityLevel` (high/medium/low), `lever`, `effort`, `confidence`, `normalizedImpact`, title and description, `pageUrl`                                                                 | a numeric target or a predicted lift                             |
-| `next_steps` → the plan's tasks          | `actionId`, `status` (open/done/verified/dismissed), `doneAt`, `verifiedAt`, `dueDate`, `dependsOnActionIds`, `recommendationId`, `lever`, title, description, `acceptanceCriteria`, `verification`, `owner` | a priority or rationale — ordering comes from the recommendation |
-| `next_steps` → `deferredRecommendations` | recommendations parked as "Not now", with any revisit date                                                                                                                                                   | a reminder                                                       |
-| `reports` → a report's `result` (frozen) | up to 5 `recommendations[]` (title, rationale, priority, rank, `isHypothesis: true`), findings, evidence, disclosures                                                                                        | live task status, targets, roadmap                               |
+| Source | Contains | Does not contain |
+| --- | --- | --- |
+| `next_steps` → recommendations | `recommendationId`, `priorityLevel` (high/medium/low), `lever`, `effort`, `confidence`, `normalizedImpact`, title and description, `pageUrl` | a numeric target or a predicted lift |
+| `next_steps` → the plan's tasks | `actionId`, `status` (open/done/verified/dismissed), `doneAt`, `verifiedAt`, `dueDate`, `dependsOnActionIds`, `recommendationId`, `lever`, title, description, `acceptanceCriteria`, `verification`, `owner` | a priority or rationale — ordering comes from the recommendation |
+| `next_steps` → `deferredRecommendations` | recommendations parked as "Not now", with any revisit date | a reminder |
+| `reports` → a report's `result` (frozen) | up to 5 `recommendations[]` (title, rationale, priority, rank, `isHypothesis: true`), findings, evidence, disclosures | live task status, targets, roadmap |
 
 Model-estimated targets and roadmaps are not reachable from chat
 tools, and shared reports do not include them. Never present a target,
