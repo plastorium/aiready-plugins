@@ -4,7 +4,7 @@
   "rules": [],
   "fingerprints": [
     {
-      "hash": "sha256:1650267997778b9b62fb9ddc3f1a6b53086e283b8d016a59b329470b1cbd07c5",
+      "hash": "sha256:9749a691f8b931b0cb74efa0e4e7f524d118a092103d49a1ae9fe96fbee7a850",
       "rule_id": "EA2",
       "file": "SKILL.md",
       "reason": "Deliberate design: a change the person asks for runs at once and its effect is reported. Confirmation is kept where it matters: a spend of at least half the remaining credits, deletes and sharing outside AIReady return a proposal the person must approve first."

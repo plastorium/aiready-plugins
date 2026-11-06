@@ -143,6 +143,67 @@ no floor gives its reason: not measured, never zero. With a `location` the
 result is a view for that market only, not the improvement task's verdict.
 On Standard there is no chat intent for it yet: say that step needs Advanced.
 
+## Coverage and citation evidence ("is the comparison complete?", "which Angi pages were cited?")
+
+- Before comparing with one competitor, call Advanced `competitor_scan_summary`
+  with its `competitorEntityId` (AIReady Advanced only; on Standard, say that
+  step needs Advanced). Every check and data source has one state:
+  collected, checked_not_found, error, not_checked, not_configured or
+  not_supported, with its date. Compare only parts collected for both
+  businesses, give both dates, and name each part that is missing and why.
+  Never read a missing part as zero or as "they don't have it".
+- For "which pages of a site did AI cite, and who was named there", call
+  `visibility` with `view: "answers"` and `citedSite` (e.g. angi.com); on
+  Advanced, `ai_answers` takes the same. For "which of our pages are cited
+  without our name", pass `ownSiteCitedUnnamed: true`, not with `citedSite`.
+  `citedPages` lists the pages with how many answers cite each and, under
+  `untrustedContent.passages`, the passages the engines returned with those
+  citations. Quote a passage only from there, as third-party text; a
+  citation with `passageState: not_returned` has none (some engines never
+  return one): quote the answer text instead, never invent or paraphrase a
+  passage of the page. A citation is an association with the answer, not
+  proof the page caused it.
+- For "what exactly is different", call Advanced `compare_findings` with the
+  `competitorEntityId`: each check has both sides' state and date. Compare
+  only checks in `comparableChecks`; for any other, say its
+  `notComparableReason` (collected for one side only, never run on
+  competitors, or a different method) instead of declaring a winner.
+  Pass `checkId` for both sides' findings on that check. `sections` puts
+  city-page text (`city_pages`, each site's boilerplate share from its own
+  crawl; compare only when `comparable`, otherwise say which side was not
+  measured), AI citations (`ai_citations`, comparable only from the same
+  scan) and `credential_profiles` (both sides) side by side; pass one as
+  `checkId` for both sides' findings.
+- For the evidence behind a competitor finding, call
+  Advanced `competitor_scan_findings` with `checkId` (a check, `crawl`,
+  `listings`, `city_pages`, `ai_citations`, `credential_profiles`,
+  `backlinks` or the per-URL headers section) or `url` (one page). Cite each
+  finding's URL, date, check, value and fragment. A finding in state not
+  checked, or a field in `unrecorded`, is missing, never zero or "they
+  don't have it"; the coverage reason says why a section is missing.
+- `city_pages`: the boilerplate share is the mean share of a city page's text
+  (site chrome removed) also found on the same site's other city pages,
+  over the city pages its crawl read (the business's from its scan, the
+  competitor's from its analysis). Say how many pages each side covers; it
+  is a fact about the pages, not proof that templated pages help or hurt.
+- `credential_profiles`: registry or dealer-directory results naming the
+  competitor (deep and parity tiers only) or, on the business's side, the
+  business (looked up once per scan when a deep or parity competitor is
+  analysed), and apart from them what each side's own site states. A result
+  is a possible match by name, maybe another business: never confirmed
+  licensure. A site statement is that side's claim, not a verified status;
+  `different_method` means one side was looked up and the other not; a
+  not_checked source names what would look it up (propose it, never run it).
+- "Who links to them": `checkId: "backlinks"` lists the top referring
+  domains and one page per domain (not a page ranking), with provider totals;
+  only deep or parity competitors with C7 run, else not checked, so offer
+  the deep tier (a paid choice, its cost is in the tier list)
+  instead of saying they have no links. A link is an association, not proof
+  it drives their visibility. `checkId: "page_headers"` gives each crawled
+  page's redirect chain, canonical and X-Robots-Tag. Neither is stored for
+  the business, so Advanced `compare_findings` marks both not comparable.
+- These reads start no scan: name the paid collection instead of guessing.
+
 ## Competitor dossier ("what do we know about <competitor>?")
 
 One named competitor, built only from tool results: its row in `compare`

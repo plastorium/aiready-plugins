@@ -82,6 +82,12 @@ location, topic or question named.
    **understand-my-business**. Done when each differing fact shows both
    values and their sources.
 
+6. **One check or page in detail** ("why did the schema check fail?",
+   "what is wrong with /pricing?"): `measure_status` with `check` (e.g.
+   `C5`), `page`, or `findings` returns the scan's signals one by one —
+   message, pages, evidence id. Page on with `offset` while `hasMore`.
+   Quote only signals it returned. Done when each claim names its signal.
+
 ## When to stop
 
 **Done when** every claim in the answer carries its count, denominator,

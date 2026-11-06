@@ -86,6 +86,8 @@ step 7: it needs no period comparison first.
    Report change only on the comparable subset; show scope changes as scope
    changes, and non-comparable periods as each period's value with no delta.
    Per-scan detail: `visibility` view summary or engines with its `scanId`.
+   Per AI system over a period: view engines with `since` (its `change`
+   gives each location's rates, compared scans and verdict as the web shows).
    Done when every number is on the comparable subset or labelled.
 4. **Competitors:** `compare` with view `changes` (AIReady
    Advanced tool: `competitor_activity`): each competitor's observed changes between its

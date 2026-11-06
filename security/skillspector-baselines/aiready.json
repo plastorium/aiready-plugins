@@ -10,13 +10,13 @@
       "reason": "Deliberate design: a change the person asks for runs at once and its effect is reported. Confirmation is kept where it matters: a spend of at least half the remaining credits, deletes and sharing outside AIReady return a proposal the person must approve first."
     },
     {
-      "hash": "sha256:cd531815d95763546d8e36f4a09c579a62ae6be1aeb8c4a463271b47d32cb3dc",
+      "hash": "sha256:0b857fc5f790db0a2ad3e11e127c0362a4a832792654619db65fb9978579906b",
       "rule_id": "EA2",
       "file": "references/mcp-workflows.md",
       "reason": "Deliberate design: a change the person asks for runs at once and its effect is reported. Confirmation is kept where it matters: a spend of at least half the remaining credits, deletes and sharing outside AIReady return a proposal the person must approve first."
     },
     {
-      "hash": "sha256:f880813e4e00ce4fbc2038d27d6850a33691cc7f57430d2a3dbc3283a64d5870",
+      "hash": "sha256:cda102c4f40b19e05aa7f531df9086f37b7a4aec3f438aa310d05779332f5f22",
       "rule_id": "EA2",
       "file": "references/mcp-workflows.md",
       "reason": "Deliberate design: a change the person asks for runs at once and its effect is reported. Confirmation is kept where it matters: a spend of at least half the remaining credits, deletes and sharing outside AIReady return a proposal the person must approve first."
