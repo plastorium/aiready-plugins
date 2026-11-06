@@ -4,7 +4,7 @@
       "type": "streamable-http",
       "url": "https://aiready.plastorium.com/api/mcp",
       "headers": {
-        "x-aiready-plugin-version": "0.23.0"
+        "x-aiready-plugin-version": "0.23.1"
       }
     }
   }

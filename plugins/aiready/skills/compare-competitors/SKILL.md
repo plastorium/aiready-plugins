@@ -200,8 +200,12 @@ On Standard there is no chat intent for it yet: say that step needs Advanced.
   the deep tier (a paid choice, its cost is in the tier list)
   instead of saying they have no links. A link is an association, not proof
   it drives their visibility. `checkId: "page_headers"` gives each crawled
-  page's redirect chain, canonical and X-Robots-Tag. Neither is stored for
-  the business, so Advanced `compare_findings` marks both not comparable.
+  page's redirect chain, canonical and X-Robots-Tag.
+  Advanced `compare_findings` with either `checkId` compares both sides: the
+  business's lists are bought once per scan when a deep or parity competitor
+  is analysed (else not checked, say why), and its headers come from its own
+  crawl, which does not record redirect hops (missing, never "no redirect").
+  Compare only when `comparable`.
 - These reads start no scan: name the paid collection instead of guessing.
 
 ## Competitor dossier ("what do we know about <competitor>?")

@@ -9,7 +9,7 @@
     {
       "name": "aiready",
       "source": "./plugins/aiready",
-      "version": "0.23.0",
+      "version": "0.23.1",
       "description": "Understand your business's competitive position, AI visibility, online presence and reputation in AIReady, then choose improvements and measure progress.",
       "author": {
         "name": "Plastorium"
@@ -22,7 +22,7 @@
           "type": "streamable-http",
           "url": "https://aiready.plastorium.com/api/mcp/advanced",
           "headers": {
-            "x-aiready-plugin-version": "0.23.0"
+            "x-aiready-plugin-version": "0.23.1"
           }
         }
       }
