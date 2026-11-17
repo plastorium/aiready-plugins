@@ -4,10 +4,11 @@ Any client that supports **remote MCP servers over Streamable HTTP with
 OAuth** can use AIReady. The plugin adds skills that make answers better; the
 connection alone gives the client the tools.
 
-| Server           | URL                                               | What it is                    |
-| ---------------- | ------------------------------------------------- | ----------------------------- |
-| AIReady          | `https://aiready.plastorium.com/api/mcp`          | the standard tools            |
-| AIReady Advanced | `https://aiready.plastorium.com/api/mcp/advanced` | extra tools, separate consent |
+| Server  | URL                                               | What it is                         |
+| ------- | ------------------------------------------------- | ---------------------------------- |
+| AIReady | `https://aiready.plastorium.com/api/mcp/advanced` | every AIReady tool, one connection |
+
+Connect this one server; the plugin connects the same one.
 
 Add the server, then sign in when the client opens the AIReady consent page.
 Never paste an API key or client secret: sign-in is OAuth only. Configuration
@@ -17,7 +18,7 @@ check your client's MCP documentation for "remote" or "HTTP" servers.
 ## Claude Code (without the plugin)
 
 ```bash
-claude mcp add --transport http aiready https://aiready.plastorium.com/api/mcp
+claude mcp add --transport http aiready https://aiready.plastorium.com/api/mcp/advanced
 ```
 
 ## Cursor, Windsurf and clients using `mcpServers`
@@ -25,7 +26,7 @@ claude mcp add --transport http aiready https://aiready.plastorium.com/api/mcp
 ```json
 {
   "mcpServers": {
-    "aiready": { "url": "https://aiready.plastorium.com/api/mcp" }
+    "aiready": { "url": "https://aiready.plastorium.com/api/mcp/advanced" }
   }
 }
 ```
@@ -37,7 +38,7 @@ claude mcp add --transport http aiready https://aiready.plastorium.com/api/mcp
   "servers": {
     "aiready": {
       "type": "http",
-      "url": "https://aiready.plastorium.com/api/mcp"
+      "url": "https://aiready.plastorium.com/api/mcp/advanced"
     }
   }
 }
@@ -48,7 +49,7 @@ claude mcp add --transport http aiready https://aiready.plastorium.com/api/mcp
 ```json
 {
   "mcpServers": {
-    "aiready": { "httpUrl": "https://aiready.plastorium.com/api/mcp" }
+    "aiready": { "httpUrl": "https://aiready.plastorium.com/api/mcp/advanced" }
   }
 }
 ```

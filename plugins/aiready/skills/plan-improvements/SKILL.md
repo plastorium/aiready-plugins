@@ -31,11 +31,9 @@ AIReady already holds, and keep "done", "confirmed" and "worked" apart.
 <!-- aiready-core:end -->
 
 **Read before you call:** [plans-and-tasks.md](references/plans-and-tasks.md)
-before `task_update` or `work_log*` (`work_log*` is on the AIReady Advanced
-connector only; decisions, lifecycle, verification ladder, what chat cannot
+before `task_update` or `work_log*` (decisions, lifecycle, verification ladder, what chat cannot
 change); [briefs-and-publishing.md](references/briefs-and-publishing.md) before
-`brief` or any `publication_*` or `topic_improvement*` call (`topic_improvement*`
-is on the AIReady Advanced connector only; briefs,
+`brief` or any `publication_*` or `topic_improvement*` call (briefs,
 confirmations, published assets, lever shipments). Shared: on a refusal, a scope or a cost question, [core-rules.md](../aiready/references/core-rules.md) and [mcp-workflows.md](../aiready/references/mcp-workflows.md) (scopes, refusals, cost).
 The plan as a CSV, TSV or Markdown table: where code runs, format the tasks with `scripts/export-plan.mjs` ([scripts.md](references/scripts.md)).
 
@@ -78,27 +76,26 @@ resolve a title; candidates → ask which).
    done: it marks a task done, and for an open recommendation accepts it and
    marks its tasks done in the same call (free), even where a work log is
    also listed: work on a plan task is never logged. Candidates → ask which.
-   X matches no recommendation or task → off-plan work is recorded on the
-   AIReady Advanced connector only (`work_log_record`, `status: done`, and
-   `occurredAt` when they say when): on this connector, say so. Done when
+   X matches no recommendation or task → off-plan work is recorded with
+   `work_log_record` (`status: done`, and `occurredAt` when they say
+   when). Done when
    the result shows it done.
 
    Done records their word, not a check: AIReady confirms it, and any
    visibility change, only after a later scan (**run-a-scan** if they ask).
-   Owner or due date → set on the web Plan (`planUrl`) or the AIReady
-   Advanced connector; chat here records decisions only.
+   Owner or due date → set on the web Plan (`planUrl`) or with a
+   per-operation (Advanced) task tool; `task_update` records decisions only.
 
 6. **Briefs and publishing:** for a publication recommendation, `brief`
    returns its brief, creating it if missing (free); give its substance in
    the chat for hand-off, with the page checks in
    [geo-content-checklist.md](references/geo-content-checklist.md) labelled as
    hypotheses to test, not proven drivers. The AI draft, the pre-publication screen,
-   regenerating a brief and recording a page or placement that went live are
-   on the AIReady Advanced connector only (`publication_asset_record`, and
-   `publication_asset_mark_published` on AIReady Advanced too): say so when
-   asked. A shipped lever for a topic is recorded on the person's word, on
-   the AIReady Advanced connector only (`topic_improvement_record`,
-   Advanced). None of these is a measurement. Done when the brief's
+   regenerating a brief and recording a page or placement that went live use
+   the per-operation (Advanced) tools (`publication_asset_record`, then
+   `publication_asset_mark_published`, Advanced too) when asked. A shipped
+   lever for a topic is recorded on the person's word with
+   `topic_improvement_record`. None of these is a measurement. Done when the brief's
    substance or the saved record is in the reply.
 7. **Finished work.** A task's status (done, still flagged or not) comes
    from `next_steps`, as plans-and-tasks.md sets out. Whether the work changed

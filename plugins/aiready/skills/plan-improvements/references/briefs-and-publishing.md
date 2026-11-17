@@ -3,9 +3,8 @@
 Getting and handing off a brief are done in chat with `brief`; never send
 the person to the web app for them. Drafting, screening or regenerating a
 brief, recording a published page, and recording, listing or deleting a
-shipped change are AIReady Advanced work (the AIReady Advanced connector, or
-the web app): when their tools are not listed, say so and do not try them;
-when they are listed, use them as below.
+shipped change use the per-operation (Advanced) tools below (or the web
+app).
 
 ## Which recommendations have a brief
 
@@ -20,9 +19,8 @@ Only these recommendations have briefs. A recommendation set aside with
 1. `brief` with the recommendation (title or id): returns the stored brief,
    or creates one (free, no AI call; it never replaces an existing brief).
    Candidates → ask which recommendation. `brief` needs `projects.write`
-   (it may create one); reading a brief without it is on the AIReady
-   Advanced connector only (`publication_get`), so tell a read-only
-   connection that.
+   (it may create one); a read-only connection reads a
+   brief with the per-operation (Advanced) `publication_get`.
 2. Give the brief's substance in the chat, ready to hand to a writer or
    agency: the objective, the questions the page must answer
    (its target questions), the format and required sections, the approved
@@ -38,28 +36,25 @@ Only these recommendations have briefs. A recommendation set aside with
 A brief is a plan, not a promise: never say the page will make AI recommend
 the business.
 
-## On the AIReady Advanced connector only
+## Per-operation (Advanced) brief tools
 
-These tools are listed only on the AIReady Advanced connector. When the
-person asks for one and its tool is not listed, say it needs the AIReady
-Advanced connector (or the web app) and what it would do; nothing is
-drafted, charged or recorded here.
+Use these when the person asks for that step; say what it does and costs.
 
 - AI draft of a thesis, outline and angles
-  (`publication_brief_draft`, AIReady Advanced): one AI call, charged to the organization's AI
+  (`publication_brief_draft`, Advanced): one AI call, charged to the organization's AI
   usage; replaces any hints drafted earlier. Drafted hints are AI suggestions
   inside the brief's approved claims, not facts about the business.
 - Pre-publication screen of a draft against 2–4 competitor pages
-  (`publication_brief_screen`, AIReady Advanced): up to about 110 AI calls, charged to
+  (`publication_brief_screen`, Advanced): up to about 110 AI calls, charged to
   AI usage, run in the background. `brief` shows a run that is queued and the
   result once it is done: how often the draft was recommended first among
   these pages — a screen on a fixed set of pages, never a prediction of real
   AI answers.
-- Regenerating a brief (AIReady Advanced `publication_brief_regenerate`):
+- Regenerating a brief (Advanced `publication_brief_regenerate`):
   permanently replaces the stored brief and any drafted hints or screen
   result. It waits for the person (below): make the call when asked.
-- Recording what was published (AIReady Advanced: `publication_asset_record`
-  and `publication_asset_mark_published`, both AIReady Advanced): the page or
+- Recording what was published (Advanced: `publication_asset_record`
+  and `publication_asset_mark_published`, both Advanced): the page or
   placement, its URL and status; published status cannot move backwards. A recorded asset is the
   person's statement, not a measurement: AIReady does not yet detect whether
   AI picks the page up, a later scan shows any change in mentions, and a
@@ -67,8 +62,8 @@ drafted, charged or recorded here.
 
 ## Steps that need the person's confirmation
 
-AIReady Advanced `publication_brief_regenerate` and
-AIReady Advanced `topic_improvement_delete` delete for good, so neither acts
+Advanced `publication_brief_regenerate` and
+`topic_improvement_delete` delete for good, so neither acts
 on the first call: make it when the person asks, and it returns the effect
 and a `confirmUrl`.
 Tell the person the effect in plain words (the stored brief is replaced, or
@@ -82,9 +77,8 @@ A yes in this conversation confirms nothing.
 - `did_it_work` lists what was recorded (shipments): a topic, a lever
   (`content`, `schema`, `authority`, `reviews` or llms.txt) and the date it
   shipped.
-- Recording, listing and deleting shipments is on the AIReady Advanced
-  connector only; on this connector, say the step needs Advanced. There,
-  `topic_improvement_record` (Advanced) on the person's word. Take
+- Record a shipment with `topic_improvement_record`, on the person's
+  word. Take
   `topicId` from `visibility` view topics: only topics with recorded
   visibility can be measured,
   and the server names the topic itself. `shippedAt` defaults to now; pass

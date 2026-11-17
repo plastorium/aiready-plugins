@@ -56,7 +56,7 @@ dismissed item already covers it. An existing open action is the answer to
 "add a task for X". A dismissed one is not re-proposed without new evidence.
 A drafted plan that goes beyond the saved Plan is labelled a draft; saving new
 tasks happens on the web (`planUrl`). An existing task's owner and due date
-are set on the web Plan or the AIReady Advanced connector, not here.
+are set on the web Plan or with a per-operation (Advanced) task tool, not with `task_update`.
 
 ## A 30-day plan, when asked
 
@@ -70,7 +70,7 @@ model result is in hand.
 
 - **Where are we? What next?** `next_steps` (optional `status`: open, done, verified, dismissed; past 200 tasks, call it again with the `cursor` its `continuation` returns). Reuse saved tasks; order by the recommendation's `priorityLevel`; a report is historical.
 - `task_update`: the person's `decision` on one recommendation or task, by title or id — accept, later (optional `until`), bring_back, dismiss (optional `reason`; `reasonCode: already_covered` when the person says their site already answers a recommendation), done. Free; it never measures. Accepting creates plan work; it is not evidence the work happened. Never dismiss to postpone.
-- A task's owner and due date: the person sets them on the web Plan (`planUrl`) or the AIReady Advanced connector.
-- `work_log*` (AIReady Advanced connector only; on Standard, send the person there): outside work that matches no recommendation or task, on the person's word; a claim, not a measurement.
+- A task's owner and due date: the person sets them on the web Plan (`planUrl`), or use a per-operation (Advanced) task tool.
+- `work_log*`: outside work that matches no recommendation or task, on the person's word; a claim, not a measurement.
 - `did_it_work`: the five answers above.
-- `brief`, `publication_*` and `topic_improvement*` (`topic_improvement*` on the AIReady Advanced connector only): content briefs, published pages and placements, lever shipments — see [briefs-and-publishing.md](briefs-and-publishing.md).
+- `brief`, `publication_*` and `topic_improvement*`: content briefs, published pages and placements, lever shipments — see [briefs-and-publishing.md](briefs-and-publishing.md).

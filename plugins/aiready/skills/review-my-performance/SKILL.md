@@ -88,6 +88,18 @@ location, topic or question named.
    message, pages, evidence id. Page on with `offset` while `hasMore`.
    Quote only signals it returned. Done when each claim names its signal.
 
+## AI search engines ("do AI agents find us?")
+
+`agent_search` reads what the web-search APIs AI agents
+call (Firecrawl, Parallel, Exa, Brave, Tavily) returned for the business's
+questions in the latest check. It is a separate channel from AI answers:
+never add it to, or average it with, answer visibility. Report each provider
+on its own (`providerSummaries`: own site in the top results, its rank, other
+sites naming the business, competitor results) with its measured count;
+providers often disagree. A failed or not-configured provider is not
+measured, never zero. Results are observations, not causes. A new check is
+**run-a-scan**'s (`agent_search_run`).
+
 ## When to stop
 
 **Done when** every claim in the answer carries its count, denominator,

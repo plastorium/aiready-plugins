@@ -33,7 +33,7 @@ interview.
 
 **Read before you call:** [profile-and-topics.md](references/profile-and-topics.md)
 before `business_add`, `business_correct`, `competitors_track`,
-`competitors_decline` or `topics_tracking`, and on the AIReady Advanced connector before a topic-map call (`manual_topic_*`, `topic_suggestion*`, `topic_group*`, `topic_placement`, `prompt_mapping_*`);
+`competitors_decline` or `topics_tracking`, and before a topic-map call (`manual_topic_*`, `topic_suggestion*`, `topic_group*`, `topic_placement`, `prompt_mapping_*`);
 [facts-profile-listings.md](references/facts-profile-listings.md) before a
 profile correction or any `knowledge_*` or `listing_*` call;
 [business-types.md](references/business-types.md) before proposing profile
@@ -116,7 +116,7 @@ come later, when they change the analysis.
    entry, in their wording, even beside an audience: applying the profile
    makes scans ask it. Changing jobs can change which questions are asked, so
    repeat the result's comparability sentence (run-a-scan § Prompts). Reading the facts and
-   discrepancies is on this connector (`business_facts`), and a disagreement is
+   discrepancies is `business_facts`, and a disagreement is
    decided here with `business_facts_resolve`. The person's own material (a
    price list, a review export, call notes) is kept with `business_material_add`:
    text or facts they give, with its label and date. It runs at once, and
@@ -125,13 +125,11 @@ come later, when they change the analysis.
    (`decisions`, a batch, sent as the person decided). A fact's text is
    changed with a fact-edit change in `business_correct` (the person's statement,
    locked, found values kept beside it), saved at once in the same list as any other change. Changing facts
-   otherwise is on AIReady Advanced only: `knowledge_fact_lock` / `_unlock` / `_resolve`
-   (AIReady Advanced), `knowledge_candidate_decide` (AIReady Advanced), `knowledge_fact_retire`
-   (AIReady Advanced), `knowledge_conflict_analyze` (AIReady Advanced) and
-   `knowledge_document_add` (AIReady Advanced). Owned listings are on AIReady Advanced
-   only too: `listing_entries` (AIReady Advanced), `listing_entry_save` (AIReady Advanced),
-   `listing_entry_delete` (AIReady Advanced), `listing_extract_url` (AIReady Advanced).
-   Here, say the step needs Advanced.
+   otherwise uses `knowledge_fact_lock` / `_unlock` / `_resolve`,
+   `knowledge_candidate_decide`, `knowledge_fact_retire`,
+   `knowledge_conflict_analyze` and `knowledge_document_add`. Owned listings
+   use `listing_entries`, `listing_entry_save`, `listing_entry_delete` and
+   `listing_extract_url`.
    Done when each change the person asked
    for is read back as saved, or reported as refused.
    **Customer-voice question (optional, asked once).** When the profile has no
@@ -148,12 +146,10 @@ come later, when they change the analysis.
 7. **Topics and settings — in chat.** `topics_tracking` to track or stop
    tracking topics by name, or to dismiss one the person does not want
    (`dismiss`; `activate` brings it back); the topic-map tools in profile-and-topics.md for
-   suggestions, groups and placement. On the AIReady Advanced connector only
-   (on this connector, say the step needs Advanced or the project's settings):
-   business and market locations (`locations_change`, AIReady Advanced; a
-   removal returns a `confirmUrl`), engines, iterations and business type
-   (`measurement_settings_update`, AIReady Advanced) and deleting a business
-   (`project_delete`, AIReady Advanced; on an explicit request). Questions scans ask → **run-a-scan**; competitor
+   suggestions, groups and placement. Business and market locations
+   (`locations_change`; a removal returns a `confirmUrl`), engines, iterations
+   and business type (`measurement_settings_update`) and deleting a business
+   (`project_delete`, on an explicit request). Questions scans ask → **run-a-scan**; competitor
    standings → **compare-competitors**. Done when each requested change is
    read back as saved.
 
@@ -185,7 +181,7 @@ it matters, then the one next step — usually the first analysis (hand off to
 - Contradictory facts (site says one city, profile another): show both with
   their sources, ask which is right, and save the answer: a profile fact
   through `business_correct`; a business fact is read with `business_facts`
-  and decided with `business_facts_resolve` (this connector). Keeping the
+  and decided with `business_facts_resolve`. Keeping the
   stated value or adopting a found one runs at once on the person's word;
   say which value replaced which and where it came from.
 - A competitor's facts belong to the competitor, never to the business.

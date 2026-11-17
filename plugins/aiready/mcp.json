@@ -3,9 +3,9 @@
   "mcpServers": {
     "aiready": {
       "type": "streamable-http",
-      "url": "https://aiready.plastorium.com/api/mcp",
+      "url": "https://aiready.plastorium.com/api/mcp/advanced",
       "headers": {
-        "x-aiready-plugin-version": "0.23.1"
+        "x-aiready-plugin-version": "0.24.0"
       }
     }
   }

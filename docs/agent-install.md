@@ -159,7 +159,7 @@ added by a workspace owner or admin is updated by that admin.
   connection as it is (next point).
 - Keep the installation's existing connection exactly as it is: do not add,
   remove or replace its connected app, and do not change its MCP URL
-  (`https://aiready.plastorium.com/api/mcp`) or permissions.
+  (`https://aiready.plastorium.com/api/mcp/advanced`) or permissions.
 - Updating writes files over the old ones and, as observed, does not delete
   files from older versions; the update archive replaces those with harmless
   stubs (see `migrations` in `RELEASE.json`). That is why updates use the

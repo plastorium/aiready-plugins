@@ -4,19 +4,19 @@
   "rules": [],
   "fingerprints": [
     {
-      "hash": "sha256:54e02baaeb4dabc7048cc7b5f208e49c68582751e7e741dbb883937f08c2a508",
+      "hash": "sha256:46311e1a8bbd66969b6ebd391dc0bdf3a371564c69c51bc0ae2e4e5b9b72dcd6",
       "rule_id": "EA2",
       "file": "SKILL.md",
       "reason": "Deliberate design: a change the person asks for runs at once and its effect is reported. Confirmation is kept where it matters: a spend of at least half the remaining credits, deletes and sharing outside AIReady return a proposal the person must approve first."
     },
     {
-      "hash": "sha256:15a50e3192e8a382a1eebcda97a97717e2e24aedf7b394ad569e5442f9cb7e0e",
+      "hash": "sha256:8a64eb5238214590e74f0b0b4d721030dcc280c777c6f8c98a263f6fdaa2de42",
       "rule_id": "EA2",
       "file": "SKILL.md",
       "reason": "Deliberate design: a change the person asks for runs at once and its effect is reported. Confirmation is kept where it matters: a spend of at least half the remaining credits, deletes and sharing outside AIReady return a proposal the person must approve first."
     },
     {
-      "hash": "sha256:c20835d894c2224ed851a62c934276de87c1494e1c3f0aa6054aa6a5fe2f8cba",
+      "hash": "sha256:ad70a72bc9f0709c0554287993ee43546fb66051b3e45f35936648f88be5f140",
       "rule_id": "EA2",
       "file": "references/profile-and-topics.md",
       "reason": "Deliberate design: a change the person asks for runs at once and its effect is reported. Confirmation is kept where it matters: a spend of at least half the remaining credits, deletes and sharing outside AIReady return a proposal the person must approve first."

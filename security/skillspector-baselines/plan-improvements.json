@@ -4,13 +4,13 @@
   "rules": [],
   "fingerprints": [
     {
-      "hash": "sha256:93b46857c42c55966977e43e5dfc7025dba79044774fbee1f9b9e4a311eb05f7",
+      "hash": "sha256:322472b16ded27cc7a62e72d8e5f25956c8b860114f521158d5f4a1c3255ea7d",
       "rule_id": "EA2",
       "file": "SKILL.md",
       "reason": "Deliberate design: a change the person asks for runs at once and its effect is reported. Confirmation is kept where it matters: a spend of at least half the remaining credits, deletes and sharing outside AIReady return a proposal the person must approve first."
     },
     {
-      "hash": "sha256:5bac7bcddc7987ee7a01eaf648be89c249ea7c2d6343be1ac75ed0c91db77069",
+      "hash": "sha256:d732251985759ce0692983889e324a5d396564bb936863ab4835cd95ae4394c5",
       "rule_id": "RA2",
       "file": "references/plans-and-tasks.md",
       "reason": "Saves only the person's own preferences and tasks, and only when the person asks AIReady to remember or track something; nothing is persisted on the assistant's own initiative."

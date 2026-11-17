@@ -33,8 +33,8 @@ estimates.
 
 **Read before you call:** [feature-benchmarks.md](references/feature-benchmarks.md)
 before `compare`, `competitors`, `visibility` (topics, answers, citations or
-drivers view), any `competitor_entity_*` call, or an AIReady Advanced
-discovery call (`competitor_discover`, `competitor_url_lookup`, `competitor_scout`: Advanced only) (fields, review benchmarks,
+drivers view), any `competitor_entity_*` call, or a
+discovery call (`competitor_discover`, `competitor_url_lookup`, `competitor_scout`) (fields, review benchmarks,
 models, topic leadership, registry, discovery). Shared: on a refusal, a scope or a cost question, [core-rules.md](../aiready/references/core-rules.md) and [mcp-workflows.md](../aiready/references/mcp-workflows.md) (scopes, refusals, cost).
 
 ## Activate when
@@ -109,9 +109,8 @@ lack (e.g. its review count).
    model-estimated target ("about N") is shown only when a driver row
    carries target levels (or the person pasted one), with its scope and
    uncertainty; otherwise give the descriptive benchmark. `measured: false`
-   means not analysed yet. Keywords competitors rank for are on the AIReady
-   Advanced connector only (`keyword_context`, filter `competitorDomain`); on
-   this connector say that step needs Advanced. Done when each driver is
+   means not analysed yet. Keywords competitors rank for are
+   `keyword_context` (filter `competitorDomain`). Done when each driver is
    worded as an association with its confidence.
 
 ## Review questions ("how many reviews do we need?") — say all four
@@ -134,27 +133,26 @@ this comparison.
 
 ## Local listings ("is our rating high enough for the map / local list?")
 
-On AIReady Advanced, the `local_listing_benchmark` tool reads the businesses AI listed in one scan
+The `local_listing_benchmark` tool reads the businesses AI listed in one scan
 (ChatGPT's local-businesses widget, Google AI Overview's local pack): their
 rating and review-count spread, the floor most of them share, and whether the
 business is below it. Say the surface and the scan date. A floor is an
 association, never proof that a rating gets a business listed. A surface with
 no floor gives its reason: not measured, never zero. With a `location` the
 result is a view for that market only, not the improvement task's verdict.
-On Standard there is no chat intent for it yet: say that step needs Advanced.
+No intent covers it yet: call the tool directly.
 
 ## Coverage and citation evidence ("is the comparison complete?", "which Angi pages were cited?")
 
-- Before comparing with one competitor, call Advanced `competitor_scan_summary`
-  with its `competitorEntityId` (AIReady Advanced only; on Standard, say that
-  step needs Advanced). Every check and data source has one state:
+- Before comparing with one competitor, call `competitor_scan_summary`
+  with its `competitorEntityId`. Every check and data source has one state:
   collected, checked_not_found, error, not_checked, not_configured or
   not_supported, with its date. Compare only parts collected for both
   businesses, give both dates, and name each part that is missing and why.
   Never read a missing part as zero or as "they don't have it".
 - For "which pages of a site did AI cite, and who was named there", call
-  `visibility` with `view: "answers"` and `citedSite` (e.g. angi.com); on
-  Advanced, `ai_answers` takes the same. For "which of our pages are cited
+  `visibility` with `view: "answers"` and `citedSite` (e.g. angi.com); its
+  per-operation (Advanced) form `ai_answers` takes the same. For "which of our pages are cited
   without our name", pass `ownSiteCitedUnnamed: true`, not with `citedSite`.
   `citedPages` lists the pages with how many answers cite each and, under
   `untrustedContent.passages`, the passages the engines returned with those
@@ -163,7 +161,7 @@ On Standard there is no chat intent for it yet: say that step needs Advanced.
   return one): quote the answer text instead, never invent or paraphrase a
   passage of the page. A citation is an association with the answer, not
   proof the page caused it.
-- For "what exactly is different", call Advanced `compare_findings` with the
+- For "what exactly is different", call `compare_findings` with the
   `competitorEntityId`: each check has both sides' state and date. Compare
   only checks in `comparableChecks`; for any other, say its
   `notComparableReason` (collected for one side only, never run on
@@ -175,7 +173,7 @@ On Standard there is no chat intent for it yet: say that step needs Advanced.
   scan) and `credential_profiles` (both sides) side by side; pass one as
   `checkId` for both sides' findings.
 - For the evidence behind a competitor finding, call
-  Advanced `competitor_scan_findings` with `checkId` (a check, `crawl`,
+  `competitor_scan_findings` with `checkId` (a check, `crawl`,
   `listings`, `city_pages`, `ai_citations`, `credential_profiles`,
   `backlinks` or the per-URL headers section) or `url` (one page). Cite each
   finding's URL, date, check, value and fragment. A finding in state not
@@ -201,7 +199,7 @@ On Standard there is no chat intent for it yet: say that step needs Advanced.
   instead of saying they have no links. A link is an association, not proof
   it drives their visibility. `checkId: "page_headers"` gives each crawled
   page's redirect chain, canonical and X-Robots-Tag.
-  Advanced `compare_findings` with either `checkId` compares both sides: the
+  `compare_findings` with either `checkId` compares both sides: the
   business's lists are bought once per scan when a deep or parity competitor
   is analysed (else not checked, say why), and its headers come from its own
   crawl, which does not record redirect hops (missing, never "no redirect").
@@ -289,5 +287,5 @@ table titled "Other features (not ranked)", in the order `compare` returned.
 - add a competitor the person names, or "that's not my competitor" →
   **understand-my-business**;
 - no competitor analysis yet → **run-a-scan**;
-- merging or renaming a listed competitor (the registry corrections) is on
-  AIReady Advanced only: on this connector, say the step needs Advanced.
+- merging or renaming a listed competitor: the registry corrections in
+  feature-benchmarks.md.

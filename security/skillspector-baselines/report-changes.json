@@ -4,13 +4,13 @@
   "rules": [],
   "fingerprints": [
     {
-      "hash": "sha256:1b9221d5649628093699fc4f7c7dc6ccd56f63206140aec7e6c681e4ee506114",
+      "hash": "sha256:fa6a88fe8bde8bf0034955269e8e08aaa39a85107042aec61e40268ad0be04bc",
       "rule_id": "EA2",
       "file": "SKILL.md",
       "reason": "Deliberate design: a change the person asks for runs at once and its effect is reported. Confirmation is kept where it matters: a spend of at least half the remaining credits, deletes and sharing outside AIReady return a proposal the person must approve first."
     },
     {
-      "hash": "sha256:39c2deed2326cfb62f398b8854f0777f16d6a54620aed5a9a837bffd8c3c67f6",
+      "hash": "sha256:8cb152aacbd734463d1e512db5990681ce06eb508b5a88aed51b4a8dc51b21d3",
       "rule_id": "AE1",
       "file": "SKILL.md",
       "reason": "Plain text the scanner cannot fully read, not hidden content: a bounded static parser stops early in a regex-heavy helper script, or flags a dense reference table as obfuscated text. Rewrites of the reported lines did not clear it (2026-11). The files are in this public repository for review."

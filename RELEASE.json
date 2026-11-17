@@ -1,7 +1,7 @@
 {
-  "version": "0.23.1",
+  "version": "0.24.0",
   "releaseNotes": [
-    "AIReady can now compare your own referring domains and page headers with a competitor's."
+    "When a licence record may be your business but the evidence is mixed, AIReady now shows it with its evidence and asks you once; your answer is kept. On AIReady Advanced, ask what AI search engines (the web-search tools AI agents use) find for your business, and start a new check once a day. AIReady now connects as one app with every tool: no separate \"AIReady Advanced\" connection to add."
   ],
   "permissionChanges": [],
   "migrations": [

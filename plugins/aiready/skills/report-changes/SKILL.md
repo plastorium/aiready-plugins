@@ -89,8 +89,8 @@ step 7: it needs no period comparison first.
    Per AI system over a period: view engines with `since` (its `change`
    gives each location's rates, compared scans and verdict as the web shows).
    Done when every number is on the comparable subset or labelled.
-4. **Competitors:** `compare` with view `changes` (AIReady
-   Advanced tool: `competitor_activity`): each competitor's observed changes between its
+4. **Competitors:** `compare` with view `changes` (its per-operation
+   (Advanced) form: `competitor_activity`): each competitor's observed changes between its
    two latest analyses with both dates, posture, activity and a proposed
    scan tier, most active first. Report what was observed, not what they
    did or why; AI-answer presence is not compared across scans, so say so

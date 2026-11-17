@@ -121,6 +121,12 @@ their times and timezone.
    read back in the person's local time, or the person has the weekly or
    monthly answer.
 
+9. **AI search engines.** "Check what AI search engines / agents find for
+   us" → `agent_search_run` (one check per business per 24
+   hours; it costs, so only on the person's ask). A refusal names when the
+   next check can start: say it, do not retry. Results come from
+   `agent_search` (**review-my-performance**). Done when the person knows the check started or when it can.
+
 ## When to stop
 
 **Done when** the person has the state AIReady returned (a started, running,

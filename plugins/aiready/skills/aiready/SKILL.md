@@ -156,7 +156,7 @@ Answer in this order, in about ten lines:
 | know which account or businesses this chat can see ("which projects can you see?") | **aiready** (below) |
 | set up or find their business, check or correct what AIReady knows about it, track or drop topics, decide which competitors are tracked ("that's not my competitor", "which of these competitors should we track?") | **understand-my-business** |
 | know how visible and accurate they are in AI answers now, overall or per engine/location | **review-my-performance** |
-| compare with competitors (topics, reviews, ratings, authority, benchmarks, "how many do I need"), find more competitors or look into the candidates AIReady found, merge or rename a listed competitor (AIReady Advanced) | **compare-competitors** |
+| compare with competitors (topics, reviews, ratings, authority, benchmarks, "how many do I need"), find more competitors or look into the candidates AIReady found, merge or rename a listed competitor | **compare-competitors** |
 | decide what to do, see or update recommendations and tasks, mark work finished ("we finished X"), check whether it is done or confirmed | **plan-improvements** |
 | see what changed over a period, measured change after completed work, competitor changes, recurring reviews or a report every month (not a scan schedule), shared reports, make or share a report | **report-changes** |
 | add, reword, approve, reject, switch off, bring back or delete a question AI is asked in each scan | **run-a-scan** |

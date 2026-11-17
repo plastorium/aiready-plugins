@@ -16,10 +16,8 @@ shared WITH the person are read with `reports`.
 - Reuse before you generate: if a report for the same type and period exists,
   offer it first.
 - Generating, editing, writing the narrative of and deleting a report, and
-  saved scan selections, are on the AIReady Advanced connector only (and the
-  partner API). On the AIReady connector, say the step needs Advanced; the
-  rest of this section is for Advanced.
-- On AIReady Advanced, `project_report_create` (`projectId`, `type`, `title`; optional `tier`,
+  saved scan selections (also on the partner API):
+- `project_report_create` (`projectId`, `type`, `title`; optional `tier`,
   `exposure`, `sectionOverrides`, `period`, `corpus`) generates and freezes a
   new report from the latest completed scans. Choose `type` from what the
   person asked: "initial_baseline" (first full picture), `monthly` (last 30
@@ -34,18 +32,18 @@ shared WITH the person are read with `reports`.
   `technical` (default, every section). `exposure: public` hides internal-only
   sections — use it for anything leaving the organization. Later scans never
   change a frozen report.
-- On AIReady Advanced, `project_report_narrative`, when they want the write-up, writes the executive summary, takeaways and
+- `project_report_narrative`, when they want the write-up, writes the executive summary, takeaways and
   section notes with AI from the report's own facts; locked sections keep
   their text. It reports quality checks that would block publishing.
-- On AIReady Advanced, `project_report_update`: rename (`title`), set `status`, or replace the
+- `project_report_update`: rename (`title`), set `status`, or replace the
   narrative (the whole object as `reports` returned it; `null`
   clears). `status: published` runs the quality checks and is final: a
   published report's status and narrative never change again — generate a
   new report to revise it. Publishing here shares it with nobody.
-- On AIReady Advanced, `project_report_delete` (it cannot be restored, so it returns a `confirmUrl`: send the person to the AIReady page to confirm; partner-API
+- `project_report_delete` (it cannot be restored, so it returns a `confirmUrl`: send the person to the AIReady page to confirm; partner-API
   reports cannot be deleted).
-- On AIReady Advanced, `saved_reports` / `saved_report_save` / `saved_report_delete`: named scan
-  selections. A saved one's `corpus` can be passed to `project_report_create` (AIReady Advanced).
+- `saved_reports` / `saved_report_save` / `saved_report_delete`: named scan
+  selections. A saved one's `corpus` can be passed to `project_report_create`.
 
 Generating a report or a narrative makes one AI call within the plan's
 allowance. If the organization's AI budget refuses it, say so in plain words;

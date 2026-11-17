@@ -4,37 +4,37 @@
   "rules": [],
   "fingerprints": [
     {
-      "hash": "sha256:b105730f2dd216538749b2ba50d4e9d8e0507b2ddf6f3a6d2a00b7030ada4eb4",
+      "hash": "sha256:b7d669ca594b9d0c5deb9dd560b2f43c19d5419efc717dd8905deaa5b594f010",
       "rule_id": "EA2",
       "file": "SKILL.md",
       "reason": "Deliberate design: a change the person asks for runs at once and its effect is reported. Confirmation is kept where it matters: a spend of at least half the remaining credits, deletes and sharing outside AIReady return a proposal the person must approve first."
     },
     {
-      "hash": "sha256:0b857fc5f790db0a2ad3e11e127c0362a4a832792654619db65fb9978579906b",
-      "rule_id": "EA2",
-      "file": "references/mcp-workflows.md",
-      "reason": "Deliberate design: a change the person asks for runs at once and its effect is reported. Confirmation is kept where it matters: a spend of at least half the remaining credits, deletes and sharing outside AIReady return a proposal the person must approve first."
-    },
-    {
-      "hash": "sha256:cda102c4f40b19e05aa7f531df9086f37b7a4aec3f438aa310d05779332f5f22",
+      "hash": "sha256:a6dbc85153a534efe8d2d64b7f4931bbdb485708ddbc6860dd7dbcf0380c935e",
       "rule_id": "EA2",
       "file": "references/mcp-workflows.md",
       "reason": "Deliberate design: a change the person asks for runs at once and its effect is reported. Confirmation is kept where it matters: a spend of at least half the remaining credits, deletes and sharing outside AIReady return a proposal the person must approve first."
     },
     {
-      "hash": "sha256:d6ab69707e56434cefb0ffbe67a534cb5434f8e645968a720713bd2eb79b5513",
+      "hash": "sha256:10bd55f5e745e09ec7dd6fb124fae0d51ab0513b30bdf09fed7953c8e947b48f",
+      "rule_id": "EA2",
+      "file": "references/mcp-workflows.md",
+      "reason": "Deliberate design: a change the person asks for runs at once and its effect is reported. Confirmation is kept where it matters: a spend of at least half the remaining credits, deletes and sharing outside AIReady return a proposal the person must approve first."
+    },
+    {
+      "hash": "sha256:911bc4a0f8e39e7c45eba1ab865bca58d2bea0f52d1699ec633be1f969c14812",
       "rule_id": "AE1",
       "file": "SKILL.md",
       "reason": "Plain text the scanner cannot fully read, not hidden content: a bounded static parser stops early in a regex-heavy helper script, or flags a dense reference table as obfuscated text. Rewrites of the reported lines did not clear it (2026-11). The files are in this public repository for review."
     },
     {
-      "hash": "sha256:60c9fe8bdaab3d03779abf2ef34c8c5bfd189a773528494041ef7028231e5ac6",
+      "hash": "sha256:bba98d7efe693183b22ac86a894898cb8eca4835c0d623fda4a1969907d1189d",
       "rule_id": "AE1",
       "file": "SKILL.md",
       "reason": "Plain text the scanner cannot fully read, not hidden content: a bounded static parser stops early in a regex-heavy helper script, or flags a dense reference table as obfuscated text. Rewrites of the reported lines did not clear it (2026-11). The files are in this public repository for review."
     },
     {
-      "hash": "sha256:6de9b097a0f41987395574a948757e12193c0f6fcdcb2cec40b94f2d21fe87c8",
+      "hash": "sha256:8377d17c2561457737a3c51e2d9f4b4f7fad3b27ac207075d0e97736936bed46",
       "rule_id": "AE1",
       "file": "SKILL.md",
       "reason": "Plain text the scanner cannot fully read, not hidden content: a bounded static parser stops early in a regex-heavy helper script, or flags a dense reference table as obfuscated text. Rewrites of the reported lines did not clear it (2026-11). The files are in this public repository for review."
